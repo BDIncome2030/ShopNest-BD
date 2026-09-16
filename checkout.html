@@ -4,17 +4,13 @@
 @media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}.category-cards{grid-template-columns:repeat(3,1fr)}.product-grid{grid-template-columns:repeat(3,1fr)}.product-grid.large{grid-template-columns:repeat(3,1fr)}.header-row{gap:10px}.header-actions{gap:9px}.hero{padding:25px}.footer-grid{grid-template-columns:2fr 1fr 1fr}}
 @media(max-width:650px){body{padding-bottom:58px}.topbar{display:none}.header{position:relative}.header-row{height:auto;padding:12px 0;flex-wrap:wrap}.mobile-menu{display:block}.logo{font-size:21px}.search{order:3;flex-basis:100%;max-width:none}.header-actions{margin-left:auto}.header-actions a{font-size:16px}.hero{min-height:350px;padding:25px;display:block}.hero h1{font-size:32px}.hero-art{width:100%;height:150px}.product-orb{font-size:75px}.floating-card{right:5px}.trust-grid{grid-template-columns:repeat(2,1fr)}.trust-grid div:nth-child(2){border-right:0}.trust-grid div:nth-child(3){border-top:1px solid #eee}.category-cards{grid-template-columns:repeat(3,1fr)}.cat-card{min-height:100px}.cat-card .emoji{font-size:30px}.product-grid,.product-grid.large{grid-template-columns:repeat(2,1fr)}.product-img{height:140px}.promo-grid{grid-template-columns:1fr}.product-detail,.cart-layout,.checkout-grid{grid-template-columns:1fr}.detail-image{min-height:300px}.detail-info h1{font-size:26px}.footer-grid{grid-template-columns:1fr 1fr}.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:58px;background:#fff;border-top:1px solid #ddd;z-index:50;display:grid;grid-template-columns:repeat(5,1fr)}.bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px}.bottom-nav small{font-size:9px;margin-top:2px}.bottom-nav .active{color:#e7353f}.catalog-head{align-items:flex-start;gap:10px}.catalog-head select{width:120px}.cart-item{grid-template-columns:60px 1fr}.cart-item>.cart-price{grid-column:2}.mini-img{width:60px;height:60px}.admin-stat-grid{grid-template-columns:1fr}.admin-table{font-size:12px}.admin-table th,.admin-table td{padding:8px}.secure{font-size:12px}}
 
-</style></head>
-<body><header class="header"><div class="container header-row"><a class="logo" href="index.html"><span class="logo-mark">✦</span>Shop<span>Nest</span></a><span class="secure">🔒 Secure Checkout</span></div></header>
-<main class="container page"><div class="checkout-grid"><section><h1>অর্ডার সম্পন্ন করুন</h1><form id="checkoutForm" class="form-card">
-<label>আপনার নাম<input required name="name" placeholder="পূর্ণ নাম"></label>
-<label>মোবাইল নম্বর<input required name="phone" inputmode="tel" placeholder="01XXXXXXXXX"></label>
-<label>জেলা<select required name="district"><option value="">জেলা নির্বাচন করুন</option><option>ঢাকা</option><option>চট্টগ্রাম</option><option>সিলেট</option><option>রাজশাহী</option><option>খুলনা</option><option>বরিশাল</option><option>রংপুর</option><option>ময়মনসিংহ</option></select></label>
-<label>সম্পূর্ণ ঠিকানা<textarea required name="address" placeholder="বাড়ি, রোড, এলাকা"></textarea></label>
-<label>পেমেন্ট পদ্ধতি</label><div class="pay-options"><label><input type="radio" name="payment" value="cod" checked> Cash on Delivery</label><label><input type="radio" name="payment" value="bkash"> bKash</label><label><input type="radio" name="payment" value="nagad"> Nagad</label></div>
-<button class="btn primary wide" type="submit">অর্ডার কনফার্ম করুন</button></form></section><aside class="summary" id="checkoutSummary"></aside></div></main>
-<script>\nconst STORE_KEY="shopnest_products_v1", CART_KEY="shopnest_cart", WISH_KEY="shopnest_wish", USER_KEY="shopnest_user", ORDER_KEY="shopnest_orders";
-const defaultProducts=[
+<script>
+const STORE_KEY = "shopnest_products_v1";
+const CART_KEY = "shopnest_cart";
+const WISH_KEY = "shopnest_wish";
+const ORDER_KEY = "shopnest_orders";
+
+const defaultProducts = [
 {id:1,name:"TWS ইয়ারবাডস",cat:"electronics",price:990,old:1800,rating:4.6,sale:true,emoji:"🎧"},
 {id:2,name:"স্মার্ট ওয়াচ",cat:"electronics",price:1499,old:2500,rating:4.7,sale:true,emoji:"⌚"},
 {id:3,name:"ল্যাপটপ ব্যাকপ্যাক",cat:"fashion",price:780,old:1200,rating:4.5,sale:true,emoji:"🎒"},
@@ -31,66 +27,167 @@ const defaultProducts=[
 {id:14,name:"সানগ্লাস",cat:"fashion",price:650,old:900,rating:4.2,sale:false,emoji:"🕶️"},
 {id:15,name:"টেবিল ল্যাম্প",cat:"home",price:950,old:1250,rating:4.5,sale:false,emoji:"💡"}
 ];
-const categories=[
-{key:"electronics",name:"মোবাইল ও ইলেকট্রনিক্স",short:"ইলেকট্রনিক্স",emoji:"📱"},
-{key:"fashion",name:"ফ্যাশন ও পোশাক",short:"ফ্যাশন",emoji:"👗"},
-{key:"home",name:"কম্পিউটার ও গ্যাজেট",short:"হোম",emoji:"💻"},
-{key:"beauty",name:"বিউটি ও পার্সোনাল কেয়ার",short:"বিউটি",emoji:"💄"},
-{key:"home",name:"হোম ও কিচেন",short:"হোম",emoji:"🏠"},
-{key:"kids",name:"বাচ্চাদের পণ্য",short:"কিডস",emoji:"🧸"}];
-function getProducts(){try{return JSON.parse(localStorage.getItem(STORE_KEY))||defaultProducts}catch(e){return defaultProducts}}
-function saveProducts(p){localStorage.setItem(STORE_KEY,JSON.stringify(p))}
-function money(n){return "৳ "+Number(n).toLocaleString("en-BD")}
-function getCart(){return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}
-function saveCart(c){localStorage.setItem(CART_KEY,JSON.stringify(c));updateCounts()}
-function getWish(){return JSON.parse(localStorage.getItem(WISH_KEY)||"[]")}
-function saveWish(w){localStorage.setItem(WISH_KEY,JSON.stringify(w));updateCounts()}
-function addToCart(id,qty=1){let c=getCart(),x=c.find(i=>i.id==id);if(x)x.qty+=qty;else c.push({id:Number(id),qty});saveCart(c);toast("কার্টে যোগ হয়েছে");}
-function toggleWish(id){let w=getWish(),n=Number(id),i=w.indexOf(n);i>=0?w.splice(i,1):w.push(n);saveWish(w);toast(i>=0?"Wishlist থেকে সরানো হয়েছে":"Wishlist-এ যোগ হয়েছে");}
-function updateCounts(){let c=getCart().reduce((s,x)=>s+x.qty,0);let w=getWish().length;document.querySelectorAll("#cartCount").forEach(e=>e.textContent=c);document.querySelectorAll("#wishCount").forEach(e=>e.textContent=w)}
-function toast(t){let e=document.createElement("div");e.className="toast";e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),1800)}
-function productCard(p){let w=getWish().includes(Number(p.id));return `<article class="product-card"><div class="product-img">${p.emoji||"📦"}${p.sale?`<span class="discount">-${Math.round((1-p.price/p.old)*100)}%</span>`:""}<button class="wish" onclick="toggleWish(${p.id});location.reload()"> ${w?"♥":"♡"} </button></div><div class="product-info"><div class="rating">★ ${p.rating}</div><div class="product-name">${p.name}</div><div><span class="price">${money(p.price)}</span>${p.old?`<span class="old-price">${money(p.old)}</span>`:""}</div><button class="add" onclick="addToCart(${p.id})">🛒 কার্টে যোগ করুন</button><a class="btn secondary wide" style="margin-top:6px;text-align:center" href="product.html?id=${p.id}">বিস্তারিত</a></div></article>`}
-function renderTopFooter(){let top=document.getElementById("topbar");if(top)top.innerHTML=`<div class="topbar"><div class="container"><span>সারা বাংলাদেশে ডেলিভারি</span><span>🛡️ নিরাপদ পেমেন্ট &nbsp; • &nbsp; 🔄 সহজ রিটার্ন</span><span>☎ Customer Support: 09612-345678</span></div></div>`;let f=document.getElementById("footer");if(f)f.className="footer",f.innerHTML=`<div class="container footer-grid"><div><h3>ShopNest BD</h3><p>Shop Smart, Live Better — বাংলাদেশের জন্য আধুনিক অনলাইন শপিং প্ল্যাটফর্ম।</p></div><div><h3>দ্রুত লিংক</h3><a href="products.html">সব পণ্য</a><a href="cart.html">কার্ট</a><a href="wishlist.html">Wishlist</a></div><div><h3>সাহায্য</h3><a href="#">শিপিং পলিসি</a><a href="#">রিটার্ন পলিসি</a><a href="#">প্রাইভেসি</a></div><div><h3>যোগাযোগ</h3><p>☎ 09612-345678</p><p>✉ support@shopnest.bd</p><p>📍 Bangladesh</p></div></div>`}
-function initCommon(){renderTopFooter();updateCounts();document.querySelectorAll("#searchForm").forEach(f=>f.addEventListener("submit",e=>{e.preventDefault();let q=f.querySelector("input").value.trim();location.href="products.html"+(q?"?q="+encodeURIComponent(q):"")}))}
-document.addEventListener("DOMContentLoaded",initCommon);
-\nconst STORE_KEY="shopnest_products_v1", CART_KEY="shopnest_cart", WISH_KEY="shopnest_wish", USER_KEY="shopnest_user", ORDER_KEY="shopnest_orders";
-const defaultProducts=[
-{id:1,name:"TWS ইয়ারবাডস",cat:"electronics",price:990,old:1800,rating:4.6,sale:true,emoji:"🎧"},
-{id:2,name:"স্মার্ট ওয়াচ",cat:"electronics",price:1499,old:2500,rating:4.7,sale:true,emoji:"⌚"},
-{id:3,name:"ল্যাপটপ ব্যাকপ্যাক",cat:"fashion",price:780,old:1200,rating:4.5,sale:true,emoji:"🎒"},
-{id:4,name:"ক্যাজুয়াল স্নিকার্স",cat:"fashion",price:999,old:2000,rating:4.4,sale:true,emoji:"👟"},
-{id:5,name:"স্কিন কেয়ার সেট",cat:"beauty",price:455,old:650,rating:4.8,sale:true,emoji:"🧴"},
-{id:6,name:"স্মার্টফোন",cat:"electronics",price:15999,old:18500,rating:4.7,sale:false,emoji:"📱"},
-{id:7,name:"ওয়্যারলেস হেডফোন",cat:"electronics",price:2200,old:3200,rating:4.6,sale:false,emoji:"🎧"},
-{id:8,name:"ড্রেস কালেকশন",cat:"fashion",price:1290,old:1800,rating:4.5,sale:false,emoji:"👗"},
-{id:9,name:"এয়ার ফ্রায়ার",cat:"home",price:3990,old:4500,rating:4.6,sale:false,emoji:"🍳"},
-{id:10,name:"কিচেন ব্লেন্ডার",cat:"home",price:1850,old:2300,rating:4.3,sale:false,emoji:"🥤"},
-{id:11,name:"মেকআপ কিট",cat:"beauty",price:1190,old:1600,rating:4.4,sale:false,emoji:"💄"},
-{id:12,name:"বাচ্চাদের খেলনা গাড়ি",cat:"kids",price:850,old:1100,rating:4.7,sale:false,emoji:"🚗"},
-{id:13,name:"টেডি বিয়ার",cat:"kids",price:690,old:900,rating:4.8,sale:false,emoji:"🧸"},
-{id:14,name:"সানগ্লাস",cat:"fashion",price:650,old:900,rating:4.2,sale:false,emoji:"🕶️"},
-{id:15,name:"টেবিল ল্যাম্প",cat:"home",price:950,old:1250,rating:4.5,sale:false,emoji:"💡"}
-];
-const categories=[
-{key:"electronics",name:"মোবাইল ও ইলেকট্রনিক্স",short:"ইলেকট্রনিক্স",emoji:"📱"},
-{key:"fashion",name:"ফ্যাশন ও পোশাক",short:"ফ্যাশন",emoji:"👗"},
-{key:"home",name:"কম্পিউটার ও গ্যাজেট",short:"হোম",emoji:"💻"},
-{key:"beauty",name:"বিউটি ও পার্সোনাল কেয়ার",short:"বিউটি",emoji:"💄"},
-{key:"home",name:"হোম ও কিচেন",short:"হোম",emoji:"🏠"},
-{key:"kids",name:"বাচ্চাদের পণ্য",short:"কিডস",emoji:"🧸"}];
-function getProducts(){try{return JSON.parse(localStorage.getItem(STORE_KEY))||defaultProducts}catch(e){return defaultProducts}}
-function saveProducts(p){localStorage.setItem(STORE_KEY,JSON.stringify(p))}
-function money(n){return "৳ "+Number(n).toLocaleString("en-BD")}
-function getCart(){return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}
-function saveCart(c){localStorage.setItem(CART_KEY,JSON.stringify(c));updateCounts()}
-function getWish(){return JSON.parse(localStorage.getItem(WISH_KEY)||"[]")}
-function saveWish(w){localStorage.setItem(WISH_KEY,JSON.stringify(w));updateCounts()}
-function addToCart(id,qty=1){let c=getCart(),x=c.find(i=>i.id==id);if(x)x.qty+=qty;else c.push({id:Number(id),qty});saveCart(c);toast("কার্টে যোগ হয়েছে");}
-function toggleWish(id){let w=getWish(),n=Number(id),i=w.indexOf(n);i>=0?w.splice(i,1):w.push(n);saveWish(w);toast(i>=0?"Wishlist থেকে সরানো হয়েছে":"Wishlist-এ যোগ হয়েছে");}
-function updateCounts(){let c=getCart().reduce((s,x)=>s+x.qty,0);let w=getWish().length;document.querySelectorAll("#cartCount").forEach(e=>e.textContent=c);document.querySelectorAll("#wishCount").forEach(e=>e.textContent=w)}
-function toast(t){let e=document.createElement("div");e.className="toast";e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),1800)}
-function productCard(p){let w=getWish().includes(Number(p.id));return `<article class="product-card"><div class="product-img">${p.emoji||"📦"}${p.sale?`<span class="discount">-${Math.round((1-p.price/p.old)*100)}%</span>`:""}<button class="wish" onclick="toggleWish(${p.id});location.reload()"> ${w?"♥":"♡"} </button></div><div class="product-info"><div class="rating">★ ${p.rating}</div><div class="product-name">${p.name}</div><div><span class="price">${money(p.price)}</span>${p.old?`<span class="old-price">${money(p.old)}</span>`:""}</div><button class="add" onclick="addToCart(${p.id})">🛒 কার্টে যোগ করুন</button><a class="btn secondary wide" style="margin-top:6px;text-align:center" href="product.html?id=${p.id}">বিস্তারিত</a></div></article>`}
-function renderTopFooter(){let top=document.getElementById("topbar");if(top)top.innerHTML=`<div class="topbar"><div class="container"><span>সারা বাংলাদেশে ডেলিভারি</span><span>🛡️ নিরাপদ পেমেন্ট &nbsp; • &nbsp; 🔄 সহজ রিটার্ন</span><span>☎ Customer Support: 09612-345678</span></div></div>`;let f=document.getElementById("footer");if(f)f.className="footer",f.innerHTML=`<div class="container footer-grid"><div><h3>ShopNest BD</h3><p>Shop Smart, Live Better — বাংলাদেশের জন্য আধুনিক অনলাইন শপিং প্ল্যাটফর্ম।</p></div><div><h3>দ্রুত লিংক</h3><a href="products.html">সব পণ্য</a><a href="cart.html">কার্ট</a><a href="wishlist.html">Wishlist</a></div><div><h3>সাহায্য</h3><a href="#">শিপিং পলিসি</a><a href="#">রিটার্ন পলিসি</a><a href="#">প্রাইভেসি</a></div><div><h3>যোগাযোগ</h3><p>☎ 09612-345678</p><p>✉ support@shopnest.bd</p><p>📍 Bangladesh</p></div></div>`}
-function initCommon(){renderTopFooter();updateCounts();document.querySelectorAll("#searchForm").forEach(f=>f.addEventListener("submit",e=>{e.preventDefault();let q=f.querySelector("input").value.trim();location.href="products.html"+(q?"?q="+encodeURIComponent(q):"")}))}
-document.addEventListener("DOMContentLoaded",initCommon);
-\ndocument.addEventListener("DOMContentLoaded",()=>{let c=getCart(),ps=getProducts(),items=c.map(x=>({...ps.find(p=>p.id===x.id),qty:x.qty})).filter(x=>x.name),sum=items.reduce((s,x)=>s+x.price*x.qty,0),ship=sum>=999?0:60;document.getElementById("checkoutSummary").innerHTML=`<h3>অর্ডার সামারি</h3>${items.map(x=>`<div class="sum-row"><span>${x.name} × ${x.qty}</span><b>${money(x.price*x.qty)}</b></div>`).join("")}<div class="sum-row"><span>Delivery</span><b>${ship?money(ship):"Free"}</b></div><div class="sum-row sum-total"><span>Total</span><b>${money(sum+ship)}</b></div>`;document.getElementById("checkoutForm").onsubmit=e=>{e.preventDefault();if(!items.length){toast("কার্ট খালি");return}let f=new FormData(e.target),orders=JSON.parse(localStorage.getItem(ORDER_KEY)||"[]"),order={id:"SN"+Date.now(),date:new Date().toLocaleString("bn-BD"),name:f.get("name"),phone:f.get("phone"),district:f.get("district"),address:f.get("address"),payment:f.get("payment"),items,total:sum+ship,status:"Pending"};orders.unshift(order);localStorage.setItem(ORDER_KEY,JSON.stringify(orders));localStorage.removeItem(CART_KEY);alert(`অর্ডার সফল হয়েছে!\\nOrder ID: ${order.id}`);location.href="account.html"}})\n</script>\n</body></html>
+
+function getProducts(){
+    try{
+        return JSON.parse(localStorage.getItem(STORE_KEY)) || defaultProducts;
+    }catch(e){
+        return defaultProducts;
+    }
+}
+
+function money(n){
+    return "৳ " + Number(n).toLocaleString("en-BD");
+}
+
+function getCart(){
+    try{
+        return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+    }catch(e){
+        return [];
+    }
+}
+
+function updateCounts(){
+    let cart = getCart();
+    let count = cart.reduce((s,x)=>s + Number(x.qty || 0),0);
+
+    document.querySelectorAll("#cartCount").forEach(e=>{
+        e.textContent = count;
+    });
+}
+
+function toast(message){
+    let e = document.createElement("div");
+    e.className = "toast";
+    e.textContent = message;
+    document.body.appendChild(e);
+
+    setTimeout(()=>{
+        e.remove();
+    },1800);
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    updateCounts();
+
+    const cart = getCart();
+    const products = getProducts();
+
+    const items = cart
+        .map(x=>{
+            const product = products.find(p => Number(p.id) === Number(x.id));
+
+            if(!product) return null;
+
+            return {
+                ...product,
+                qty:Number(x.qty || 1)
+            };
+        })
+        .filter(x=>x !== null);
+
+    const subtotal = items.reduce(
+        (sum,item)=>sum + (Number(item.price) * Number(item.qty)),
+        0
+    );
+
+    const delivery = subtotal >= 999 ? 0 : 60;
+    const total = subtotal + delivery;
+
+    const summary = document.getElementById("checkoutSummary");
+
+    summary.innerHTML = `
+        <h3>অর্ডার সামারি</h3>
+
+        ${items.map(item=>`
+            <div class="sum-row">
+                <span>${item.name} × ${item.qty}</span>
+                <b>${money(item.price * item.qty)}</b>
+            </div>
+        `).join("")}
+
+        <div class="sum-row">
+            <span>Delivery</span>
+            <b>${delivery === 0 ? "Free" : money(delivery)}</b>
+        </div>
+
+        <div class="sum-row sum-total">
+            <span>Total</span>
+            <b>${money(total)}</b>
+        </div>
+    `;
+
+    const form = document.getElementById("checkoutForm");
+
+    form.addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        if(items.length === 0){
+            alert("কার্ট খালি।");
+            location.href = "cart.html";
+            return;
+        }
+
+        const formData = new FormData(form);
+
+        const order = {
+            id: "SN" + Date.now(),
+
+            date: new Date().toLocaleString("bn-BD"),
+
+            name: formData.get("name"),
+            phone: formData.get("phone"),
+            district: formData.get("district"),
+            address: formData.get("address"),
+            payment: formData.get("payment"),
+
+            items: items,
+
+            subtotal: subtotal,
+            delivery: delivery,
+            total: total,
+
+            status: "Pending"
+        };
+
+        let orders = [];
+
+        try{
+            orders = JSON.parse(
+                localStorage.getItem(ORDER_KEY) || "[]"
+            );
+
+            if(!Array.isArray(orders)){
+                orders = [];
+            }
+
+        }catch(error){
+            orders = [];
+        }
+
+        orders.unshift(order);
+
+        localStorage.setItem(
+            ORDER_KEY,
+            JSON.stringify(orders)
+        );
+
+        // Cart খালি করা
+        localStorage.removeItem(CART_KEY);
+
+        // Order সফল
+        alert(
+            "অর্ডার সফলভাবে সম্পন্ন হয়েছে!\\n\\n" +
+            "Order ID: " + order.id + "\\n" +
+            "মোট: " + money(order.total)
+        );
+
+        // Account page-এ যাবে
+        window.location.href = "account.html";
+    });
+
+});
+</script>
