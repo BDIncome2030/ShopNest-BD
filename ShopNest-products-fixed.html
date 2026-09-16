@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopNest BD — Products</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f7f8fa;color:#172033}
+a{text-decoration:none;color:inherit}
+.header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:5}
+.top{height:72px;display:flex;align-items:center;gap:18px;padding:10px 28px}
+.logo{font-size:30px;font-weight:800;color:#172033}
+.logo span{color:#ef3348}
+.menu{font-size:28px;border:1px solid #ddd;border-radius:10px;padding:4px 10px;background:#fff}
+.search{display:flex;flex:1;max-width:650px;margin:auto}
+.search input{flex:1;padding:14px 18px;border:1px solid #ddd;border-radius:28px 0 0 28px;font-size:17px}
+.search button{width:65px;border:0;border-radius:0 28px 28px 0;background:#ef3348;color:white;font-size:22px}
+.actions{display:flex;gap:18px;font-size:14px;white-space:nowrap}
+.actions b{display:block;text-align:center;font-size:23px}
+.container{max-width:1200px;margin:auto;padding:24px 18px 90px}
+.breadcrumb{color:#888;margin-bottom:18px}.breadcrumb a{color:#ef3348}
+.titleRow{display:flex;justify-content:space-between;align-items:center;gap:12px}
+h1{font-size:42px;margin:10px 0 24px}
+select{padding:12px 28px;border:1px solid #ddd;border-radius:12px;background:#fff;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #eee;box-shadow:0 3px 12px #0000000d}
+.pic{height:210px;background:#f1f4f8;display:flex;align-items:center;justify-content:center;font-size:82px}
+.info{padding:15px}.cat{font-size:13px;color:#888}.name{font-size:18px;font-weight:700;margin:7px 0}
+.price{color:#ef3348;font-size:21px;font-weight:800}.old{text-decoration:line-through;color:#999;font-size:13px;margin-left:6px}
+.btn{width:100%;border:0;background:#ef3348;color:#fff;padding:12px;border-radius:10px;margin-top:12px;font-size:15px;font-weight:700}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:9px 4px;z-index:10}
+.bottom a{text-align:center;font-size:13px}.bottom b{display:block;font-size:23px}
+@media(max-width:800px){.top{padding:9px 16px;gap:10px}.logo{font-size:25px}.actions{gap:9px}.grid{grid-template-columns:repeat(2,1fr)}.pic{height:165px}.titleRow{align-items:flex-start}h1{font-size:36px}}
+@media(max-width:480px){.top{flex-wrap:wrap;height:auto}.menu{order:0}.logo{order:1}.actions{order:2;margin-left:auto}.search{order:3;flex-basis:100%;max-width:none}.grid{gap:10px}.container{padding:18px 10px 85px}.pic{height:145px;font-size:60px}.name{font-size:16px}.price{font-size:18px}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="top">
+    <button class="menu" onclick="location.href='index.html'">☰</button>
+    <a class="logo" href="index.html">✦Shop<span>Nest</span></a>
+    <div class="actions">
+      <a href="account.html"><b>👤</b>Account</a>
+      <a href="wishlist.html"><b>♡</b>Wishlist <span id="wishCount">0</span></a>
+      <a href="cart.html"><b>🛒</b>Cart <span id="cartCount">0</span></a>
+    </div>
+    <form class="search" onsubmit="searchProducts(event)">
+      <input id="search" placeholder="কি খুঁজছেন?">
+      <button>⌕</button>
+    </form>
+  </div>
+</header>
+
+<main class="container">
+  <div class="breadcrumb"><a href="index.html">Home</a> / Products</div>
+  <div class="titleRow">
+    <h1>সব পণ্য</h1>
+    <select id="sort" onchange="render()">
+      <option value="default">সাধারণ</option>
+      <option value="low">কম দাম আগে</option>
+      <option value="high">বেশি দাম আগে</option>
+    </select>
+  </div>
+  <div id="grid" class="grid"></div>
+</main>
+
+<nav class="bottom">
+  <a href="index.html"><b>⌂</b>Home</a>
+  <a href="products.html"><b>▦</b>Categories</a>
+  <a href="cart.html"><b>🛒</b>Cart</a>
+  <a href="wishlist.html"><b>♡</b>Wishlist</a>
+  <a href="account.html"><b>👤</b>Account</a>
+</nav>
+
+<script>
+const products=[
+{id:1,name:"স্মার্ট ওয়াচ",cat:"ইলেকট্রনিক্স",price:1499,old:2499,icon:"⌚"},
+{id:2,name:"TWS ইয়ারবাড",cat:"ইলেকট্রনিক্স",price:990,old:1800,icon:"🎧"},
+{id:3,name:"ল্যাপটপ ব্যাকপ্যাক",cat:"ব্যাগ",price:780,old:1200,icon:"🎒"},
+{id:4,name:"ক্যাজুয়াল স্নিকার",cat:"ফ্যাশন",price:999,old:2000,icon:"👟"},
+{id:5,name:"প্রিমিয়াম স্কিন কেয়ার",cat:"বিউটি",price:455,old:650,icon:"🧴"},
+{id:6,name:"মোবাইল ফোন",cat:"মোবাইল",price:12990,old:14990,icon:"📱"},
+{id:7,name:"হেডফোন",cat:"ইলেকট্রনিক্স",price:1250,old:1800,icon:"🎧"},
+{id:8,name:"এয়ার ফ্রায়ার",cat:"হোম & কিচেন",price:3290,old:3990,icon:"🍳"}
+];
+
+function getCart(){try{return JSON.parse(localStorage.getItem("shopnest_cart")||"[]")}catch(e){return[]}}
+function updateCounts(){
+ let c=getCart().reduce((s,x)=>s+(x.qty||1),0);
+ document.getElementById("cartCount").textContent=c;
+ let w=[];try{w=JSON.parse(localStorage.getItem("shopnest_wishlist")||"[]")}catch(e){}
+ document.getElementById("wishCount").textContent=w.length;
+}
+function addCart(id){
+ let cart=getCart(), p=products.find(x=>x.id===id), item=cart.find(x=>x.id===id);
+ if(item)item.qty=(item.qty||1)+1; else cart.push({...p,qty:1});
+ localStorage.setItem("shopnest_cart",JSON.stringify(cart));updateCounts();
+ alert("পণ্যটি কার্টে যোগ হয়েছে");
+}
+function render(list=products){
+ let q=document.getElementById("search").value.trim().toLowerCase();
+ let arr=list.filter(p=>!q||p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q));
+ let sort=document.getElementById("sort").value;
+ if(sort==="low")arr.sort((a,b)=>a.price-b.price);
+ if(sort==="high")arr.sort((a,b)=>b.price-a.price);
+ document.getElementById("grid").innerHTML=arr.length?arr.map(p=>`
+ <article class="card">
+  <div class="pic">${p.icon}</div>
+  <div class="info">
+   <div class="cat">${p.cat}</div>
+   <div class="name">${p.name}</div>
+   <div><span class="price">৳ ${p.price.toLocaleString("bn-BD")}</span><span class="old">৳ ${p.old.toLocaleString("bn-BD")}</span></div>
+   <button class="btn" onclick="addCart(${p.id})">🛒 কার্টে যোগ করুন</button>
+  </div>
+ </article>`).join(""):`<div style="grid-column:1/-1;text-align:center;padding:60px;font-size:20px">কোনো পণ্য পাওয়া যায়নি।</div>`;
+}
+function searchProducts(e){e.preventDefault();render()}
+render();updateCounts();
+</script>
+</body>
+</html>
