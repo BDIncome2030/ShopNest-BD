@@ -2,9 +2,8 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>Product Details — ShopNest BD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details - ShopNest BD</title>
 
 <style>
 *{
@@ -14,7 +13,7 @@
 body{
   margin:0;
   font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:#fff;
+  background:#f5f7fa;
   color:#182230;
 }
 
@@ -23,39 +22,47 @@ a{
   color:inherit;
 }
 
-.container{
-  width:min(1180px,92%);
-  margin:auto;
+button{
+  font-family:inherit;
+  cursor:pointer;
 }
 
 /* HEADER */
 .header{
-  border-bottom:1px solid #eee;
   background:#fff;
+  border-bottom:1px solid #e5e7eb;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
-.header-row{
-  min-height:75px;
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
   display:flex;
   align-items:center;
-  gap:20px;
-  flex-wrap:wrap;
-  padding:10px 0;
+  gap:25px;
 }
 
 .logo{
   font-size:25px;
   font-weight:800;
+  color:#182230;
   white-space:nowrap;
 }
 
+.logo span{
+  color:#08a66a;
+}
+
 .search{
-  display:flex;
   flex:1;
-  max-width:560px;
+  display:flex;
   border:1px solid #ddd;
-  border-radius:25px;
+  border-radius:30px;
   overflow:hidden;
+  background:#fff;
 }
 
 .search input{
@@ -69,353 +76,528 @@ a{
 .search button{
   width:60px;
   border:0;
-  background:#ed3042;
-  color:#fff;
-  font-size:20px;
-  cursor:pointer;
+  background:#08a66a;
+  color:white;
+  font-size:22px;
 }
 
-.actions{
+.header-actions{
   display:flex;
-  gap:15px;
-  margin-left:auto;
+  align-items:center;
+  gap:18px;
 }
 
-.actions a{
-  text-align:center;
-  font-size:15px;
+.action{
+  position:relative;
+  font-size:25px;
 }
 
 .badge{
-  background:#ed3042;
-  color:#fff;
+  position:absolute;
+  top:-7px;
+  right:-10px;
+  background:#ef3340;
+  color:white;
   border-radius:20px;
-  padding:2px 6px;
+  min-width:19px;
+  height:19px;
   font-size:11px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* PAGE */
-.page{
-  padding:25px 0 90px;
+/* CONTAINER */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
 }
 
+/* BREADCRUMB */
 .breadcrumb{
-  color:#888;
-  margin-bottom:20px;
-  font-size:16px;
+  margin:5px 0 18px;
+  color:#6b7280;
+  font-size:15px;
 }
 
 .breadcrumb a{
-  color:#ed3042;
+  color:#08a66a;
 }
 
-/* PRODUCT */
+.breadcrumb span{
+  margin:0 8px;
+}
+
+/* MAIN PRODUCT */
 .product-box{
+  background:#fff;
+  border-radius:16px;
+  padding:20px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:45px;
-  border:1px solid #e5e8ec;
-  border-radius:18px;
-  padding:25px;
-  background:#fff;
+  gap:28px;
+  box-shadow:0 2px 10px rgba(0,0,0,.04);
 }
 
 /* IMAGE */
-.product-image{
-  min-height:430px;
-  background:#f5f7fa;
-  border-radius:16px;
+.image-area{
+  background:#f4f7fa;
+  border-radius:15px;
+  min-height:500px;
   display:flex;
   align-items:center;
   justify-content:center;
   position:relative;
+  overflow:hidden;
 }
 
-.product-image span{
-  font-size:180px;
+.product-emoji{
+  font-size:190px;
 }
 
 .discount{
   position:absolute;
-  top:18px;
   left:18px;
-  background:#ed3345;
-  color:#fff;
-  padding:8px 13px;
-  border-radius:20px;
+  top:18px;
+  background:#ef3340;
+  color:white;
+  padding:10px 17px;
+  border-radius:25px;
+  font-size:18px;
   font-weight:bold;
 }
 
-/* INFO */
+/* DETAILS */
 .category{
-  color:#777;
+  color:#08a66a;
   font-size:15px;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
 .product-title{
-  font-size:34px;
+  font-size:38px;
   margin:5px 0 12px;
 }
 
 .rating{
-  color:#f39a00;
-  font-size:18px;
+  color:#f5ae00;
+  font-size:21px;
   margin-bottom:15px;
 }
 
+.rating span{
+  color:#555;
+  font-size:15px;
+}
+
 .price-row{
-  margin:15px 0;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
 }
 
 .price{
-  color:#e7353f;
-  font-size:32px;
-  font-weight:bold;
+  color:#ef3340;
+  font-size:40px;
+  font-weight:800;
 }
 
 .old-price{
   color:#999;
+  font-size:22px;
   text-decoration:line-through;
-  font-size:18px;
-  margin-left:10px;
 }
 
-.save{
-  color:#168a45;
+.stock{
+  color:#159447;
+  font-size:17px;
   font-weight:bold;
-  margin-top:8px;
+  margin:13px 0;
 }
 
-.description{
-  color:#596575;
+.description-short{
+  color:#5c6673;
+  font-size:17px;
   line-height:1.8;
-  font-size:16px;
-  margin:20px 0;
 }
 
 /* QUANTITY */
 .quantity-title{
   font-weight:bold;
+  margin-top:18px;
   margin-bottom:8px;
 }
 
 .quantity{
   display:flex;
   align-items:center;
-  gap:15px;
-  margin-bottom:20px;
+  width:max-content;
+  border:1px solid #ddd;
+  border-radius:25px;
+  overflow:hidden;
 }
 
 .quantity button{
   width:45px;
-  height:45px;
-  border:1px solid #ddd;
-  background:#fff;
-  border-radius:9px;
+  height:42px;
+  border:0;
+  background:#f5f7fa;
   font-size:22px;
-  cursor:pointer;
 }
 
 .quantity span{
-  font-size:20px;
-  font-weight:bold;
-  min-width:25px;
+  width:48px;
   text-align:center;
+  font-size:18px;
 }
 
 /* BUTTONS */
 .buttons{
-  display:flex;
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:12px;
-  flex-wrap:wrap;
+  margin-top:20px;
 }
 
-.cart-btn,
-.buy-btn{
+.btn{
   border:0;
-  padding:14px 25px;
-  border-radius:9px;
+  border-radius:10px;
+  padding:15px;
   font-size:17px;
   font-weight:bold;
-  cursor:pointer;
 }
 
 .cart-btn{
-  background:#ed3345;
-  color:#fff;
+  background:#08a66a;
+  color:white;
 }
 
 .buy-btn{
-  background:#182230;
-  color:#fff;
+  background:#ef3340;
+  color:white;
 }
 
 .wish-btn{
-  margin-top:12px;
-  width:100%;
-  padding:12px;
-  background:#fff;
-  border:1px solid #ed3345;
-  color:#ed3345;
-  border-radius:9px;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
+  background:white;
+  color:#182230;
+  border:1px solid #ddd;
+  grid-column:1 / -1;
 }
 
-/* INFO CARDS */
+.wish-btn.active{
+  color:#ef3340;
+  border-color:#ef3340;
+}
+
+/* BENEFITS */
+.benefits{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.benefit{
+  background:#f3fbf7;
+  border-radius:10px;
+  padding:14px 8px;
+  text-align:center;
+}
+
+.benefit-icon{
+  font-size:25px;
+}
+
+.benefit strong{
+  display:block;
+  margin-top:5px;
+  font-size:14px;
+}
+
+.benefit small{
+  color:#777;
+}
+
+/* INFO */
+.info-box{
+  background:white;
+  border-radius:16px;
+  margin-top:20px;
+  padding:0 20px 25px;
+}
+
+.tabs{
+  display:flex;
+  gap:5px;
+  border-bottom:1px solid #ddd;
+  overflow-x:auto;
+}
+
+.tab{
+  border:0;
+  background:white;
+  padding:17px 22px;
+  font-size:16px;
+  white-space:nowrap;
+}
+
+.tab.active{
+  background:#08a66a;
+  color:white;
+  border-radius:8px 8px 0 0;
+}
+
+.tab-content{
+  padding-top:20px;
+  font-size:17px;
+  line-height:1.8;
+}
+
+/* FEATURES */
+.feature-box{
+  background:#f2faf6;
+  border-radius:12px;
+  padding:20px;
+  margin-top:18px;
+}
+
+.feature-box h2{
+  margin-top:0;
+  color:#087f56;
+}
+
 .features{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-top:25px;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 
 .feature{
-  border:1px solid #e5e8ec;
-  border-radius:12px;
-  padding:18px;
-  text-align:center;
+  font-size:15px;
+}
+
+.feature::before{
+  content:"✓";
+  color:#08a66a;
+  font-weight:bold;
+  margin-right:8px;
+}
+
+/* RELATED */
+.related-section{
   background:#fff;
+  border-radius:16px;
+  margin-top:20px;
+  padding:20px;
 }
 
-.feature-icon{
-  font-size:30px;
-  margin-bottom:8px;
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
 }
 
-.feature strong{
-  display:block;
-  margin-bottom:5px;
+.section-title h2{
+  margin:0;
 }
 
-.feature small{
-  color:#777;
+.related-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.related-card{
+  border:1px solid #e1e5e9;
+  border-radius:12px;
+  overflow:hidden;
+  background:white;
+}
+
+.related-image{
+  height:180px;
+  background:#f3f6f9;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:85px;
+}
+
+.related-info{
+  padding:12px;
+}
+
+.related-info h3{
+  margin:0 0 7px;
+  font-size:16px;
+}
+
+.related-rating{
+  color:#f5ae00;
+  font-size:14px;
+}
+
+.related-price{
+  color:#ef3340;
+  font-size:20px;
+  font-weight:bold;
+  margin-top:7px;
+}
+
+.related-old{
+  color:#999;
+  text-decoration:line-through;
+  font-size:13px;
+  margin-left:5px;
+}
+
+.related-cart{
+  margin-top:10px;
+  width:100%;
+  border:0;
+  background:#08a66a;
+  color:white;
+  border-radius:7px;
+  padding:9px;
 }
 
 /* NOT FOUND */
 .not-found{
+  background:white;
+  padding:50px 20px;
   text-align:center;
-  padding:80px 20px;
+  border-radius:15px;
 }
 
-.not-found div{
-  font-size:70px;
-}
-
-/* BOTTOM */
-.bottom{
+/* BOTTOM NAV */
+.bottom-nav{
   display:none;
 }
 
 /* MOBILE */
 @media(max-width:800px){
 
-  .product-box{
-    grid-template-columns:1fr;
-    gap:25px;
-    padding:15px;
-  }
-
-  .product-image{
-    min-height:320px;
-  }
-
-  .product-image span{
-    font-size:130px;
-  }
-
-  .product-title{
-    font-size:27px;
-  }
-
-  .price{
-    font-size:28px;
-  }
-
-  .features{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:650px){
-
-  body{
-    padding-bottom:65px;
-  }
-
-  .header-row{
-    padding:12px 0;
+  .header-inner{
+    padding:10px 12px;
+    gap:10px;
+    flex-wrap:wrap;
   }
 
   .logo{
-    font-size:22px;
+    font-size:20px;
+  }
+
+  .header-actions{
+    gap:13px;
   }
 
   .search{
     order:3;
     flex-basis:100%;
-    max-width:none;
   }
 
-  .actions{
-    gap:10px;
-  }
-
-  .actions a{
-    font-size:13px;
-  }
-
-  .page{
-    padding-top:18px;
+  .container{
+    padding:12px;
   }
 
   .product-box{
-    border-radius:14px;
+    grid-template-columns:1fr;
+    padding:12px;
+    gap:18px;
   }
 
-  .product-image{
-    min-height:280px;
+  .image-area{
+    min-height:330px;
   }
 
-  .product-image span{
-    font-size:110px;
+  .product-emoji{
+    font-size:130px;
   }
 
-  .buttons{
-    flex-direction:column;
+  .product-title{
+    font-size:31px;
   }
 
-  .cart-btn,
-  .buy-btn{
-    width:100%;
+  .price{
+    font-size:34px;
   }
 
-  .bottom{
+  .description-short{
+    font-size:15px;
+  }
+
+  .benefits{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .features{
+    grid-template-columns:1fr;
+  }
+
+  .related-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .related-image{
+    height:135px;
+    font-size:65px;
+  }
+
+  .bottom-nav{
     position:fixed;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
     bottom:0;
     left:0;
     right:0;
-    height:65px;
-    background:#fff;
+    background:white;
     border-top:1px solid #ddd;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    z-index:100;
+    z-index:200;
   }
 
-  .bottom a{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    font-size:20px;
+  .bottom-nav a{
+    text-align:center;
+    padding:8px 2px;
+    font-size:12px;
   }
 
-  .bottom small{
-    font-size:10px;
-    margin-top:2px;
+  .bottom-nav div{
+    font-size:23px;
+  }
+
+  body{
+    padding-bottom:65px;
+  }
+}
+
+@media(max-width:430px){
+
+  .buttons{
+    grid-template-columns:1fr;
+  }
+
+  .wish-btn{
+    grid-column:auto;
+  }
+
+  .related-grid{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  .related-info{
+    padding:8px;
+  }
+
+  .related-info h3{
+    font-size:14px;
+  }
+
+  .related-price{
+    font-size:17px;
   }
 }
 </style>
@@ -423,90 +605,315 @@ a{
 
 <body>
 
+<!-- HEADER -->
 <header class="header">
+  <div class="header-inner">
 
-  <div class="container header-row">
-
-    <a class="logo" href="index.html">
-      🛍️ ShopNest BD
+    <a href="index.html" class="logo">
+      🛍️ ShopNest <span>BD</span>
     </a>
 
-    <form class="search" id="searchForm">
-
-      <input
-        id="searchInput"
-        type="search"
-        placeholder="কি খুঁজছেন?"
-      >
-
-      <button type="submit">
-        🔍
-      </button>
-
+    <form class="search" onsubmit="searchProducts(event)">
+      <input id="searchInput" type="search" placeholder="কি খুঁজছেন?">
+      <button type="submit">🔍</button>
     </form>
 
-    <div class="actions">
+    <div class="header-actions">
 
-      <a href="cart.html">
-        🛒<br>
-        কার্ট
-        <span class="badge" id="cartCount">0</span>
-      </a>
-
-      <a href="wishlist.html">
-        ❤️<br>
-        Wishlist
+      <a href="products.html" class="action">
+        ❤️
         <span class="badge" id="wishCount">0</span>
       </a>
 
-      <a href="account.html">
-        👤<br>
-        Account
+      <a href="cart.html" class="action">
+        🛒
+        <span class="badge" id="cartCount">0</span>
+      </a>
+
+      <a href="account.html" class="action">
+        👤
       </a>
 
     </div>
 
   </div>
-
 </header>
 
 
-<main class="container page">
+<main class="container">
 
+  <!-- BREADCRUMB -->
   <div class="breadcrumb">
     <a href="index.html">Home</a>
-    /
+    <span>/</span>
     <a href="products.html">Products</a>
-    /
-    Details
+    <span>/</span>
+    <span id="breadcrumbName">Details</span>
   </div>
 
 
-  <div id="productContainer"></div>
+  <!-- PRODUCT -->
+  <div id="productArea">
+
+    <div class="product-box">
+
+      <!-- IMAGE -->
+      <div class="image-area">
+
+        <div class="discount" id="discount">-40%</div>
+
+        <div class="product-emoji" id="productEmoji">
+          ⌚
+        </div>
+
+      </div>
+
+
+      <!-- DETAILS -->
+      <div>
+
+        <div class="category" id="productCategory">
+          ইলেকট্রনিক্স
+        </div>
+
+        <h1 class="product-title" id="productName">
+          স্মার্ট ওয়াচ
+        </h1>
+
+        <div class="rating">
+          ⭐⭐⭐⭐⭐
+          <span id="ratingText">4.7 / 5</span>
+        </div>
+
+        <div class="price-row">
+          <div class="price" id="productPrice">৳ 1,499</div>
+          <div class="old-price" id="productOldPrice">৳ 2,500</div>
+        </div>
+
+        <div class="stock">
+          🟢 স্টকে আছে
+        </div>
+
+        <div class="description-short" id="shortDescription">
+          আধুনিক ডিজাইন, স্মার্ট ফিচার এবং দীর্ঘ ব্যাটারি
+          ব্যাকআপসহ আপনার প্রতিদিনের জীবনকে আরও সহজ
+          এবং স্মার্ট করে তুলবে এই স্মার্ট ওয়াচ।
+        </div>
+
+
+        <!-- QUANTITY -->
+        <div class="quantity-title">
+          পরিমাণ:
+        </div>
+
+        <div class="quantity">
+          <button onclick="changeQty(-1)">−</button>
+          <span id="quantity">1</span>
+          <button onclick="changeQty(1)">+</button>
+        </div>
+
+
+        <!-- BUTTONS -->
+        <div class="buttons">
+
+          <button class="btn cart-btn" onclick="addToCart()">
+            🛒 Add to Cart
+          </button>
+
+          <button class="btn buy-btn" onclick="buyNow()">
+            ⚡ Buy Now
+          </button>
+
+          <button class="btn wish-btn" id="wishButton" onclick="toggleWishlist()">
+            ♡ Add to Wishlist
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- BENEFITS -->
+    <div class="benefits">
+
+      <div class="benefit">
+        <div class="benefit-icon">🚚</div>
+        <strong>দ্রুত ডেলিভারি</strong>
+        <small>সারা বাংলাদেশ</small>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">🛡️</div>
+        <strong>নিরাপদ পেমেন্ট</strong>
+        <small>100% নিরাপদ</small>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">🔄</div>
+        <strong>সহজ রিটার্ন</strong>
+        <small>৭ দিনের মধ্যে</small>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">☎️</div>
+        <strong>কাস্টমার সাপোর্ট</strong>
+        <small>24/7 সাপোর্ট</small>
+      </div>
+
+    </div>
+
+
+    <!-- DESCRIPTION / FEATURES -->
+    <div class="info-box">
+
+      <div class="tabs">
+
+        <button class="tab active" onclick="showTab('description',this)">
+          পণ্য বিবরণী
+        </button>
+
+        <button class="tab" onclick="showTab('features',this)">
+          ফিচার
+        </button>
+
+        <button class="tab" onclick="showTab('review',this)">
+          রিভিউ
+        </button>
+
+        <button class="tab" onclick="showTab('return',this)">
+          রিটার্ন পলিসি
+        </button>
+
+      </div>
+
+
+      <div class="tab-content" id="descriptionTab">
+
+        <h2>পণ্য সম্পর্কে</h2>
+
+        <p id="longDescription">
+          এই স্মার্ট ওয়াচটি আধুনিক প্রযুক্তি ও স্টাইলিশ
+          ডিজাইনের সমন্বয়ে তৈরি। প্রতিদিনের ব্যবহার,
+          ফিটনেস এবং প্রয়োজনীয় নোটিফিকেশন সহজে দেখার
+          জন্য এটি ব্যবহার করতে পারবেন।
+        </p>
+
+        <div class="feature-box">
+
+          <h2>🛡️ মূল বৈশিষ্ট্যসমূহ</h2>
+
+          <div class="features">
+
+            <div class="feature">হার্ট রেট মনিটর</div>
+            <div class="feature">স্লিপ ট্র্যাকিং</div>
+            <div class="feature">স্পোর্টস মোড</div>
+            <div class="feature">কল ও মেসেজ নোটিফিকেশন</div>
+            <div class="feature">ক্যালোরি কাউন্টার</div>
+            <div class="feature">দীর্ঘ ব্যাটারি লাইফ</div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="tab-content" id="featuresTab" style="display:none">
+
+        <h2>⚙️ Product Features</h2>
+
+        <div class="features">
+
+          <div class="feature">Premium Design</div>
+          <div class="feature">Heart Rate Monitoring</div>
+          <div class="feature">Sleep Monitoring</div>
+          <div class="feature">Multiple Sports Modes</div>
+          <div class="feature">Call Notification</div>
+          <div class="feature">Message Notification</div>
+          <div class="feature">Step Counter</div>
+          <div class="feature">Calorie Counter</div>
+          <div class="feature">Long Battery Backup</div>
+          <div class="feature">Easy Bluetooth Connection</div>
+
+        </div>
+
+      </div>
+
+
+      <div class="tab-content" id="reviewTab" style="display:none">
+
+        <h2>⭐ Customer Reviews</h2>
+
+        <p>
+          ⭐⭐⭐⭐⭐ <b>4.7/5</b>
+        </p>
+
+        <p>
+          আমাদের ক্রেতাদের অভিজ্ঞতা খুব শীঘ্রই এখানে
+          দেখানো হবে।
+        </p>
+
+      </div>
+
+
+      <div class="tab-content" id="returnTab" style="display:none">
+
+        <h2>🔄 রিটার্ন পলিসি</h2>
+
+        <p>
+          পণ্য হাতে পাওয়ার পর নির্ধারিত সময়ের মধ্যে
+          পণ্যে সমস্যা থাকলে আমাদের সাথে যোগাযোগ করুন।
+          রিটার্নের ক্ষেত্রে পণ্যের অবস্থা ও প্রযোজ্য
+          শর্ত প্রযোজ্য হবে।
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- RELATED PRODUCTS -->
+    <div class="related-section">
+
+      <div class="section-title">
+        <h2>🛍️ সম্পর্কিত পণ্যসমূহ</h2>
+        <a href="products.html" style="color:#08a66a;">
+          আরও দেখুন →
+        </a>
+      </div>
+
+      <div class="related-grid" id="relatedProducts"></div>
+
+    </div>
+
+  </div>
 
 </main>
 
 
-<nav class="bottom">
+<!-- MOBILE NAV -->
+<nav class="bottom-nav">
 
   <a href="index.html">
-    🏠
-    <small>Home</small>
+    <div>🏠</div>
+    Home
   </a>
 
   <a href="products.html">
-    🛍️
-    <small>Products</small>
+    <div>🛍️</div>
+    Products
   </a>
 
   <a href="cart.html">
-    🛒
-    <small>Cart</small>
+    <div>🛒</div>
+    Cart
   </a>
 
   <a href="account.html">
-    👤
-    <small>Account</small>
+    <div>👤</div>
+    Account
   </a>
 
 </nav>
@@ -514,218 +921,323 @@ a{
 
 <script>
 
+/* STORAGE KEYS */
 const CART_KEY = "shopnest_cart";
 const WISH_KEY = "shopnest_wish";
 
 
 /* PRODUCTS */
-
 const products = [
 
-{
-  id:1,
-  name:"TWS ইয়ারবাডস",
-  cat:"electronics",
-  catName:"ইলেকট্রনিক্স",
-  price:990,
-  old:1800,
-  rating:4.6,
-  emoji:"🎧",
-  description:"উচ্চমানের TWS ইয়ারবাডস। গান শোনা, কল করা এবং দৈনন্দিন ব্যবহারের জন্য উপযোগী।"
-},
+  {
+    id:1,
+    name:"TWS ইয়ারবাডস",
+    cat:"electronics",
+    catBn:"ইলেকট্রনিক্স",
+    price:990,
+    old:1800,
+    rating:4.6,
+    emoji:"🎧",
+    desc:"উন্নত সাউন্ড কোয়ালিটি ও ওয়্যারলেস ব্যবহারের সুবিধাসহ TWS ইয়ারবাডস।"
+  },
 
-{
-  id:2,
-  name:"স্মার্ট ওয়াচ",
-  cat:"electronics",
-  catName:"ইলেকট্রনিক্স",
-  price:1499,
-  old:2500,
-  rating:4.7,
-  emoji:"⌚",
-  description:"আধুনিক ডিজাইনের স্মার্ট ওয়াচ। দৈনন্দিন ব্যবহার ও স্মার্ট ফিচারের জন্য উপযোগী।"
-},
+  {
+    id:2,
+    name:"স্মার্ট ওয়াচ",
+    cat:"electronics",
+    catBn:"ইলেকট্রনিক্স",
+    price:1499,
+    old:2500,
+    rating:4.7,
+    emoji:"⌚",
+    desc:"আধুনিক ডিজাইন, স্মার্ট ফিচার এবং দীর্ঘ ব্যাটারি ব্যাকআপসহ স্মার্ট ওয়াচ।"
+  },
 
-{
-  id:3,
-  name:"ল্যাপটপ ব্যাকপ্যাক",
-  cat:"fashion",
-  catName:"ফ্যাশন",
-  price:780,
-  old:1200,
-  rating:4.5,
-  emoji:"🎒",
-  description:"ল্যাপটপ ও প্রয়োজনীয় জিনিস বহনের জন্য সুন্দর ও ব্যবহারযোগ্য ব্যাকপ্যাক।"
-},
+  {
+    id:3,
+    name:"ল্যাপটপ ব্যাকপ্যাক",
+    cat:"fashion",
+    catBn:"ফ্যাশন",
+    price:780,
+    old:1200,
+    rating:4.5,
+    emoji:"🎒",
+    desc:"ল্যাপটপ ও প্রয়োজনীয় জিনিস বহনের জন্য স্টাইলিশ ও মজবুত ব্যাকপ্যাক।"
+  },
 
-{
-  id:4,
-  name:"ক্যাজুয়াল স্নিকার্স",
-  cat:"fashion",
-  catName:"ফ্যাশন",
-  price:999,
-  old:2000,
-  rating:4.4,
-  emoji:"👟",
-  description:"দৈনন্দিন ব্যবহারের জন্য আরামদায়ক ক্যাজুয়াল স্নিকার্স।"
-},
+  {
+    id:4,
+    name:"ক্যাজুয়াল স্নিকার্স",
+    cat:"fashion",
+    catBn:"ফ্যাশন",
+    price:999,
+    old:2000,
+    rating:4.4,
+    emoji:"👟",
+    desc:"প্রতিদিনের ব্যবহারের জন্য আরামদায়ক ও স্টাইলিশ ক্যাজুয়াল স্নিকার্স।"
+  },
 
-{
-  id:5,
-  name:"স্কিন কেয়ার সেট",
-  cat:"beauty",
-  catName:"বিউটি",
-  price:455,
-  old:650,
-  rating:4.8,
-  emoji:"🧴",
-  description:"দৈনন্দিন স্কিন কেয়ার রুটিনের জন্য প্রয়োজনীয় পণ্যের সুন্দর সেট।"
-},
+  {
+    id:5,
+    name:"স্কিন কেয়ার সেট",
+    cat:"beauty",
+    catBn:"বিউটি",
+    price:455,
+    old:650,
+    rating:4.8,
+    emoji:"🧴",
+    desc:"দৈনন্দিন স্কিন কেয়ারের জন্য প্রয়োজনীয় পণ্যের সুন্দর সেট।"
+  },
 
-{
-  id:6,
-  name:"স্মার্টফোন",
-  cat:"electronics",
-  catName:"ইলেকট্রনিক্স",
-  price:15999,
-  old:18500,
-  rating:4.7,
-  emoji:"📱",
-  description:"আধুনিক ডিজাইনের স্মার্টফোন। দৈনন্দিন যোগাযোগ ও বিভিন্ন কাজে ব্যবহার করা যায়।"
-},
+  {
+    id:6,
+    name:"স্মার্টফোন",
+    cat:"electronics",
+    catBn:"ইলেকট্রনিক্স",
+    price:15999,
+    old:18500,
+    rating:4.7,
+    emoji:"📱",
+    desc:"দৈনন্দিন কাজ ও বিনোদনের জন্য আধুনিক স্মার্টফোন।"
+  },
 
-{
-  id:7,
-  name:"ওয়্যারলেস হেডফোন",
-  cat:"electronics",
-  catName:"ইলেকট্রনিক্স",
-  price:2200,
-  old:3200,
-  rating:4.6,
-  emoji:"🎧",
-  description:"আরামদায়ক ওয়্যারলেস হেডফোন। গান ও অন্যান্য অডিও শোনার জন্য উপযোগী।"
-},
+  {
+    id:7,
+    name:"ওয়্যারলেস হেডফোন",
+    cat:"electronics",
+    catBn:"ইলেকট্রনিক্স",
+    price:2200,
+    old:3200,
+    rating:4.6,
+    emoji:"🎧",
+    desc:"উন্নত সাউন্ড ও আরামদায়ক ব্যবহারের জন্য ওয়্যারলেস হেডফোন।"
+  },
 
-{
-  id:8,
-  name:"ড্রেস কালেকশন",
-  cat:"fashion",
-  catName:"ফ্যাশন",
-  price:1290,
-  old:1800,
-  rating:4.5,
-  emoji:"👗",
-  description:"স্টাইলিশ ও আকর্ষণীয় ড্রেস কালেকশন।"
-},
+  {
+    id:8,
+    name:"ড্রেস কালেকশন",
+    cat:"fashion",
+    catBn:"ফ্যাশন",
+    price:1290,
+    old:1800,
+    rating:4.5,
+    emoji:"👗",
+    desc:"স্টাইলিশ ডিজাইনের সুন্দর ড্রেস কালেকশন।"
+  },
 
-{
-  id:9,
-  name:"এয়ার ফ্রায়ার",
-  cat:"home",
-  catName:"হোম",
-  price:3990,
-  old:4500,
-  rating:4.6,
-  emoji:"🍳",
-  description:"রান্নাঘরের জন্য ব্যবহারযোগ্য এয়ার ফ্রায়ার।"
-},
+  {
+    id:9,
+    name:"এয়ার ফ্রায়ার",
+    cat:"home",
+    catBn:"হোম",
+    price:3990,
+    old:4500,
+    rating:4.6,
+    emoji:"🍳",
+    desc:"সহজে ও কম তেলে বিভিন্ন খাবার প্রস্তুতের জন্য এয়ার ফ্রায়ার।"
+  },
 
-{
-  id:10,
-  name:"কিচেন ব্লেন্ডার",
-  cat:"home",
-  catName:"হোম",
-  price:1850,
-  old:2300,
-  rating:4.3,
-  emoji:"🥤",
-  description:"রান্নাঘরের দৈনন্দিন ব্যবহারের জন্য সুবিধাজনক ব্লেন্ডার।"
-},
+  {
+    id:10,
+    name:"কিচেন ব্লেন্ডার",
+    cat:"home",
+    catBn:"হোম",
+    price:1850,
+    old:2300,
+    rating:4.3,
+    emoji:"🥤",
+    desc:"রান্নাঘরের বিভিন্ন কাজে ব্যবহারযোগ্য শক্তিশালী ব্লেন্ডার।"
+  },
 
-{
-  id:11,
-  name:"মেকআপ কিট",
-  cat:"beauty",
-  catName:"বিউটি",
-  price:1190,
-  old:1600,
-  rating:4.4,
-  emoji:"💄",
-  description:"দৈনন্দিন ব্যবহারের জন্য সুন্দর মেকআপ কিট।"
-},
+  {
+    id:11,
+    name:"মেকআপ কিট",
+    cat:"beauty",
+    catBn:"বিউটি",
+    price:1190,
+    old:1600,
+    rating:4.4,
+    emoji:"💄",
+    desc:"দৈনন্দিন ব্যবহারের জন্য প্রয়োজনীয় মেকআপ পণ্যের সেট।"
+  },
 
-{
-  id:12,
-  name:"বাচ্চাদের খেলনা গাড়ি",
-  cat:"kids",
-  catName:"কিডস",
-  price:850,
-  old:1100,
-  rating:4.7,
-  emoji:"🚗",
-  description:"শিশুদের বিনোদনের জন্য আকর্ষণীয় খেলনা গাড়ি।"
-},
+  {
+    id:12,
+    name:"বাচ্চাদের খেলনা গাড়ি",
+    cat:"kids",
+    catBn:"কিডস",
+    price:850,
+    old:1100,
+    rating:4.7,
+    emoji:"🚗",
+    desc:"বাচ্চাদের আনন্দের জন্য সুন্দর খেলনা গাড়ি।"
+  },
 
-{
-  id:13,
-  name:"টেডি বিয়ার",
-  cat:"kids",
-  catName:"কিডস",
-  price:690,
-  old:900,
-  rating:4.8,
-  emoji:"🧸",
-  description:"শিশুদের জন্য সুন্দর ও নরম টেডি বিয়ার।"
-},
+  {
+    id:13,
+    name:"টেডি বিয়ার",
+    cat:"kids",
+    catBn:"কিডস",
+    price:690,
+    old:900,
+    rating:4.8,
+    emoji:"🧸",
+    desc:"শিশুদের জন্য নরম ও আকর্ষণীয় টেডি বিয়ার।"
+  },
 
-{
-  id:14,
-  name:"সানগ্লাস",
-  cat:"fashion",
-  catName:"ফ্যাশন",
-  price:650,
-  old:900,
-  rating:4.2,
-  emoji:"🕶️",
-  description:"স্টাইলিশ ডিজাইনের সানগ্লাস।"
-},
+  {
+    id:14,
+    name:"সানগ্লাস",
+    cat:"fashion",
+    catBn:"ফ্যাশন",
+    price:650,
+    old:900,
+    rating:4.2,
+    emoji:"🕶️",
+    desc:"স্টাইলিশ লুকের জন্য আধুনিক সানগ্লাস।"
+  },
 
-{
-  id:15,
-  name:"টেবিল ল্যাম্প",
-  cat:"home",
-  catName:"হোম",
-  price:950,
-  old:1250,
-  rating:4.5,
-  emoji:"💡",
-  description:"পড়াশোনা ও কাজের টেবিলের জন্য ব্যবহারযোগ্য টেবিল ল্যাম্প।"
-}
+  {
+    id:15,
+    name:"টেবিল ল্যাম্প",
+    cat:"home",
+    catBn:"হোম",
+    price:950,
+    old:1250,
+    rating:4.5,
+    emoji:"💡",
+    desc:"পড়াশোনা ও কাজের জন্য সুন্দর টেবিল ল্যাম্প।"
+  }
 
 ];
 
 
-/* MONEY */
+/* CURRENT PRODUCT */
+let currentProduct = null;
+let qty = 1;
 
-function money(n){
 
-  return "৳ " + Number(n).toLocaleString("en-BD");
+/* GET ID */
+function getProductId(){
+
+  const params = new URLSearchParams(window.location.search);
+
+  return Number(params.get("id")) || 1;
 
 }
 
 
-/* CART */
+/* LOAD PRODUCT */
+function loadProduct(){
 
+  const id = getProductId();
+
+  currentProduct = products.find(p => p.id === id);
+
+  if(!currentProduct){
+
+    document.getElementById("productArea").innerHTML = `
+      <div class="not-found">
+        <h2>😔 পণ্যটি পাওয়া যায়নি</h2>
+        <p>এই পণ্যটি বর্তমানে পাওয়া যাচ্ছে না।</p>
+        <br>
+        <a href="products.html" class="btn cart-btn">
+          সব পণ্য দেখুন
+        </a>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  document.title =
+    currentProduct.name + " - ShopNest BD";
+
+
+  document.getElementById("breadcrumbName").textContent =
+    currentProduct.name;
+
+
+  document.getElementById("productEmoji").textContent =
+    currentProduct.emoji;
+
+
+  document.getElementById("productName").textContent =
+    currentProduct.name;
+
+
+  document.getElementById("productCategory").textContent =
+    currentProduct.catBn;
+
+
+  document.getElementById("productPrice").textContent =
+    "৳ " + currentProduct.price.toLocaleString("en-IN");
+
+
+  document.getElementById("productOldPrice").textContent =
+    "৳ " + currentProduct.old.toLocaleString("en-IN");
+
+
+  document.getElementById("ratingText").textContent =
+    currentProduct.rating + " / 5";
+
+
+  document.getElementById("shortDescription").textContent =
+    currentProduct.desc;
+
+
+  document.getElementById("longDescription").textContent =
+    currentProduct.desc +
+    " এই পণ্যটি দৈনন্দিন ব্যবহারের জন্য তৈরি করা হয়েছে এবং ব্যবহারকারীর সুবিধাকে গুরুত্ব দিয়ে ডিজাইন করা হয়েছে।";
+
+
+  const discount =
+    Math.round(
+      ((currentProduct.old - currentProduct.price) /
+      currentProduct.old) * 100
+    );
+
+
+  document.getElementById("discount").textContent =
+    "-" + discount + "%";
+
+
+  updateWishlistButton();
+
+  renderRelatedProducts();
+
+  updateCounts();
+
+}
+
+
+/* QUANTITY */
+function changeQty(value){
+
+  qty += value;
+
+  if(qty < 1){
+    qty = 1;
+  }
+
+  if(qty > 20){
+    qty = 20;
+  }
+
+  document.getElementById("quantity").textContent = qty;
+
+}
+
+
+/* GET CART */
 function getCart(){
 
   try{
 
-    const data =
-      JSON.parse(
-        localStorage.getItem(CART_KEY) || "[]"
-      );
-
-    return Array.isArray(data) ? data : [];
+    return JSON.parse(
+      localStorage.getItem(CART_KEY)
+    ) || [];
 
   }catch(e){
 
@@ -736,22 +1248,177 @@ function getCart(){
 }
 
 
-/* WISHLIST */
+/* SAVE CART */
+function saveCart(cart){
 
-function getWish(){
+  localStorage.setItem(
+    CART_KEY,
+    JSON.stringify(cart)
+  );
+
+}
+
+
+/* ADD TO CART */
+function addToCart(){
+
+  if(!currentProduct) return;
+
+
+  const cart = getCart();
+
+  const existing = cart.find(
+    item => Number(item.id) === currentProduct.id
+  );
+
+
+  if(existing){
+
+    existing.qty += qty;
+
+  }else{
+
+    cart.push({
+      id: currentProduct.id,
+      qty: qty
+    });
+
+  }
+
+
+  saveCart(cart);
+
+  updateCounts();
+
+  alert(
+    currentProduct.name +
+    " কার্টে যোগ হয়েছে।"
+  );
+
+}
+
+
+/* BUY NOW */
+function buyNow(){
+
+  if(!currentProduct) return;
+
+
+  const cart = getCart();
+
+  const existing = cart.find(
+    item => Number(item.id) === currentProduct.id
+  );
+
+
+  if(existing){
+
+    existing.qty += qty;
+
+  }else{
+
+    cart.push({
+      id: currentProduct.id,
+      qty: qty
+    });
+
+  }
+
+
+  saveCart(cart);
+
+  window.location.href = "checkout.html";
+
+}
+
+
+/* GET WISHLIST */
+function getWishlist(){
 
   try{
 
-    const data =
-      JSON.parse(
-        localStorage.getItem(WISH_KEY) || "[]"
-      );
-
-    return Array.isArray(data) ? data : [];
+    return JSON.parse(
+      localStorage.getItem(WISH_KEY)
+    ) || [];
 
   }catch(e){
 
     return [];
+
+  }
+
+}
+
+
+/* TOGGLE WISHLIST */
+function toggleWishlist(){
+
+  if(!currentProduct) return;
+
+
+  let wishlist = getWishlist();
+
+  const id = currentProduct.id;
+
+  const index = wishlist.findIndex(
+    item => Number(item) === id
+  );
+
+
+  if(index === -1){
+
+    wishlist.push(id);
+
+  }else{
+
+    wishlist.splice(index,1);
+
+  }
+
+
+  localStorage.setItem(
+    WISH_KEY,
+    JSON.stringify(wishlist)
+  );
+
+
+  updateWishlistButton();
+
+  updateCounts();
+
+}
+
+
+/* WISHLIST BUTTON */
+function updateWishlistButton(){
+
+  if(!currentProduct) return;
+
+
+  const wishlist = getWishlist();
+
+  const active = wishlist.some(
+    item => Number(item) === currentProduct.id
+  );
+
+
+  const button =
+    document.getElementById("wishButton");
+
+
+  if(active){
+
+    button.textContent =
+      "❤️ Added to Wishlist";
+
+    button.classList.add("active");
+
+  }else{
+
+    button.textContent =
+      "♡ Add to Wishlist";
+
+    button.classList.remove("active");
 
   }
 
@@ -759,472 +1426,215 @@ function getWish(){
 
 
 /* COUNTS */
-
 function updateCounts(){
 
   const cart = getCart();
 
-  const count =
-    cart.reduce(
-      (total,item)=>{
-        return total + Number(item.qty || 0);
-      },
-      0
-    );
+  const wishlist = getWishlist();
 
-  document.getElementById("cartCount").textContent = count;
+
+  let cartCount = 0;
+
+  cart.forEach(item => {
+
+    cartCount += Number(item.qty) || 0;
+
+  });
+
+
+  document.getElementById("cartCount").textContent =
+    cartCount;
+
 
   document.getElementById("wishCount").textContent =
-    getWish().length;
+    wishlist.length;
 
 }
 
 
-/* ADD CART */
+/* RELATED PRODUCTS */
+function renderRelatedProducts(){
 
-function addToCart(id,qty){
+  if(!currentProduct) return;
 
-  let cart = getCart();
 
-  const product =
-    products.find(
-      p => Number(p.id) === Number(id)
-    );
+  const related =
+    products
+      .filter(p =>
+        p.cat === currentProduct.cat &&
+        p.id !== currentProduct.id
+      )
+      .slice(0,4);
 
-  if(!product){
-    return;
-  }
 
-  let item =
-    cart.find(
-      x => Number(x.id) === Number(id)
-    );
+  const box =
+    document.getElementById("relatedProducts");
 
-  if(item){
 
-    item.qty =
-      Number(item.qty || 0) + Number(qty);
+  box.innerHTML = related.map(p => {
 
-  }else{
+    const discount =
+      Math.round(
+        ((p.old - p.price) / p.old) * 100
+      );
 
-    cart.push({
-      id:Number(id),
-      qty:Number(qty)
-    });
 
-  }
+    return `
 
-  localStorage.setItem(
-    CART_KEY,
-    JSON.stringify(cart)
-  );
+      <div class="related-card">
 
-  updateCounts();
+        <a href="product-details.html?id=${p.id}">
 
-  alert("✅ পণ্য কার্টে যোগ হয়েছে");
+          <div class="related-image">
 
-}
+            ${p.emoji}
 
+          </div>
 
-/* BUY NOW */
-
-function buyNow(id,qty){
-
-  let cart = getCart();
-
-  const product =
-    products.find(
-      p => Number(p.id) === Number(id)
-    );
-
-  if(!product){
-    return;
-  }
-
-  let item =
-    cart.find(
-      x => Number(x.id) === Number(id)
-    );
-
-  if(item){
-
-    item.qty =
-      Number(item.qty || 0) + Number(qty);
-
-  }else{
-
-    cart.push({
-      id:Number(id),
-      qty:Number(qty)
-    });
-
-  }
-
-  localStorage.setItem(
-    CART_KEY,
-    JSON.stringify(cart)
-  );
-
-  window.location.href = "checkout.html";
-
-}
-
-
-/* WISHLIST */
-
-function toggleWishlist(id){
-
-  let wish = getWish();
-
-  const index =
-    wish.findIndex(
-      x => Number(x) === Number(id)
-    );
-
-  if(index >= 0){
-
-    wish.splice(index,1);
-
-    alert("💔 Wishlist থেকে সরানো হয়েছে");
-
-  }else{
-
-    wish.push(Number(id));
-
-    alert("❤️ Wishlist-এ যোগ হয়েছে");
-
-  }
-
-  localStorage.setItem(
-    WISH_KEY,
-    JSON.stringify(wish)
-  );
-
-  updateCounts();
-
-  updateWishButton(id);
-
-}
-
-
-/* WISH BUTTON */
-
-function updateWishButton(id){
-
-  const button =
-    document.getElementById("wishButton");
-
-  if(!button){
-    return;
-  }
-
-  const wish = getWish();
-
-  const exists =
-    wish.some(
-      x => Number(x) === Number(id)
-    );
-
-  button.innerHTML =
-    exists
-    ? "❤️ Wishlist থেকে সরান"
-    : "♡ Wishlist-এ যোগ করুন";
-
-}
-
-
-/* CHANGE QUANTITY */
-
-function changeQuantity(change){
-
-  const qtyElement =
-    document.getElementById("quantity");
-
-  let qty =
-    Number(qtyElement.textContent);
-
-  qty += change;
-
-  if(qty < 1){
-    qty = 1;
-  }
-
-  if(qty > 10){
-    qty = 10;
-  }
-
-  qtyElement.textContent = qty;
-
-}
-
-
-/* LOAD PRODUCT */
-
-function loadProduct(){
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-  const id =
-    Number(params.get("id"));
-
-  const product =
-    products.find(
-      p => Number(p.id) === id
-    );
-
-  const container =
-    document.getElementById("productContainer");
-
-
-  if(!product){
-
-    container.innerHTML = `
-
-      <div class="not-found">
-
-        <div>😔</div>
-
-        <h2>পণ্যটি পাওয়া যায়নি</h2>
-
-        <p>দয়া করে আবার Products পেজ থেকে পণ্য নির্বাচন করুন।</p>
-
-        <a
-          href="products.html"
-          class="cart-btn"
-          style="display:inline-block;margin-top:15px;"
-        >
-          🛍️ সব পণ্য দেখুন
         </a>
+
+        <div class="related-info">
+
+          <h3>
+            ${p.name}
+          </h3>
+
+          <div class="related-rating">
+            ⭐ ${p.rating}
+          </div>
+
+          <div class="related-price">
+
+            ৳ ${p.price.toLocaleString("en-IN")}
+
+            <span class="related-old">
+              ৳ ${p.old.toLocaleString("en-IN")}
+            </span>
+
+          </div>
+
+          <button
+            class="related-cart"
+            onclick="addRelatedToCart(${p.id})">
+
+            🛒 কার্টে যোগ
+
+          </button>
+
+        </div>
 
       </div>
 
     `;
 
-    return;
+  }).join("");
+
+}
+
+
+/* RELATED CART */
+function addRelatedToCart(id){
+
+  const cart = getCart();
+
+  const existing = cart.find(
+    item => Number(item.id) === id
+  );
+
+
+  if(existing){
+
+    existing.qty += 1;
+
+  }else{
+
+    cart.push({
+      id:id,
+      qty:1
+    });
 
   }
 
 
-  const discount =
-    Math.round(
-      ((product.old - product.price) /
-      product.old) * 100
+  saveCart(cart);
+
+  updateCounts();
+
+  const product =
+    products.find(p => p.id === id);
+
+
+  if(product){
+
+    alert(
+      product.name +
+      " কার্টে যোগ হয়েছে।"
     );
 
+  }
 
-  container.innerHTML = `
-
-    <section class="product-box">
-
-      <div class="product-image">
-
-        <div class="discount">
-          -${discount}%
-        </div>
-
-        <span>${product.emoji}</span>
-
-      </div>
+}
 
 
-      <div class="product-info">
+/* TABS */
+function showTab(name, button){
 
-        <div class="category">
-          ${product.catName}
-        </div>
+  document.getElementById("descriptionTab").style.display =
+    "none";
 
-        <h1 class="product-title">
-          ${product.name}
-        </h1>
+  document.getElementById("featuresTab").style.display =
+    "none";
 
-        <div class="rating">
-          ⭐ ${product.rating}
-          <span style="color:#777;font-size:14px;">
-            / 5
-          </span>
-        </div>
+  document.getElementById("reviewTab").style.display =
+    "none";
+
+  document.getElementById("returnTab").style.display =
+    "none";
 
 
-        <div class="price-row">
-
-          <span class="price">
-            ${money(product.price)}
-          </span>
-
-          <span class="old-price">
-            ${money(product.old)}
-          </span>
-
-          <div class="save">
-            💰 ${money(product.old - product.price)} সাশ্রয়
-          </div>
-
-        </div>
+  document.getElementById(
+    name + "Tab"
+  ).style.display = "block";
 
 
-        <div class="description">
-          ${product.description}
-        </div>
+  document.querySelectorAll(".tab")
+    .forEach(tab => {
+      tab.classList.remove("active");
+    });
 
 
-        <div class="quantity-title">
-          পরিমাণ
-        </div>
-
-        <div class="quantity">
-
-          <button onclick="changeQuantity(-1)">
-            −
-          </button>
-
-          <span id="quantity">
-            1
-          </span>
-
-          <button onclick="changeQuantity(1)">
-            +
-          </button>
-
-        </div>
-
-
-        <div class="buttons">
-
-          <button
-            class="cart-btn"
-            onclick="addToCart(${product.id}, Number(document.getElementById('quantity').textContent))"
-          >
-            🛒 কার্টে যোগ করুন
-          </button>
-
-
-          <button
-            class="buy-btn"
-            onclick="buyNow(${product.id}, Number(document.getElementById('quantity').textContent))"
-          >
-            ⚡ এখনই কিনুন
-          </button>
-
-        </div>
-
-
-        <button
-          class="wish-btn"
-          id="wishButton"
-          onclick="toggleWishlist(${product.id})"
-        >
-          ♡ Wishlist-এ যোগ করুন
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <section class="features">
-
-      <div class="feature">
-
-        <div class="feature-icon">
-          🚚
-        </div>
-
-        <strong>হোম ডেলিভারি</strong>
-
-        <small>
-          আপনার ঠিকানায় পণ্য পৌঁছে যাবে
-        </small>
-
-      </div>
-
-
-      <div class="feature">
-
-        <div class="feature-icon">
-          💵
-        </div>
-
-        <strong>ক্যাশ অন ডেলিভারি</strong>
-
-        <small>
-          পণ্য হাতে পেয়ে পেমেন্ট করুন
-        </small>
-
-      </div>
-
-
-      <div class="feature">
-
-        <div class="feature-icon">
-          🔒
-        </div>
-
-        <strong>নিরাপদ অর্ডার</strong>
-
-        <small>
-          সহজ ও নিরাপদ অর্ডার প্রক্রিয়া
-        </small>
-
-      </div>
-
-    </section>
-
-  `;
-
-
-  updateWishButton(product.id);
+  button.classList.add("active");
 
 }
 
 
 /* SEARCH */
+function searchProducts(event){
 
-document
-  .getElementById("searchForm")
-  .addEventListener(
-    "submit",
-    function(e){
+  event.preventDefault();
 
-      e.preventDefault();
+  const value =
+    document.getElementById("searchInput").value.trim();
 
-      const query =
-        document
-        .getElementById("searchInput")
-        .value
-        .trim();
 
-      if(query){
+  if(value){
 
-        window.location.href =
-          "products.html?q=" +
-          encodeURIComponent(query);
+    window.location.href =
+      "products.html?q=" +
+      encodeURIComponent(value);
 
-      }else{
+  }else{
 
-        window.location.href =
-          "products.html";
+    window.location.href =
+      "products.html";
 
-      }
+  }
 
-    }
-  );
+}
 
 
 /* START */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function(){
-
-    updateCounts();
-
-    loadProduct();
-
-  }
-);
+loadProduct();
 
 </script>
 
