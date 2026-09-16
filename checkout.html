@@ -1,13 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Checkout — ShopNest BD</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
@@ -37,6 +39,7 @@ a{
 .topbar .container{
     display:flex;
     justify-content:space-between;
+    gap:10px;
 }
 
 /* HEADER */
@@ -74,6 +77,7 @@ a{
     color:#e7353f;
 }
 
+/* SEARCH */
 .search{
     display:flex;
     flex:1;
@@ -102,6 +106,7 @@ a{
     cursor:pointer;
 }
 
+/* HEADER ACTIONS */
 .header-actions{
     display:flex;
     gap:18px;
@@ -259,6 +264,7 @@ a{
     font-weight:bold;
 }
 
+/* BUTTON */
 .btn{
     border:0;
     border-radius:8px;
@@ -277,6 +283,12 @@ a{
     background:#d92739;
 }
 
+.success-btn{
+    background:#16803a;
+    color:#fff;
+    min-width:150px;
+}
+
 .wide{
     width:100%;
 }
@@ -288,6 +300,29 @@ a{
     background:#f8fafc;
     border-radius:10px;
     color:#687586;
+}
+
+/* SUCCESS */
+.success-box{
+    text-align:center;
+    padding:35px 15px;
+}
+
+.success-icon{
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.success-box h1{
+    color:#16803a;
+}
+
+.order-info{
+    background:#f5f8fb;
+    border-radius:12px;
+    padding:20px;
+    margin:20px 0;
+    text-align:left;
 }
 
 /* FOOTER */
@@ -313,18 +348,6 @@ a{
     color:#aeb9c8;
     display:block;
     margin:8px 0;
-}
-
-/* TOAST */
-.toast{
-    position:fixed;
-    right:18px;
-    bottom:18px;
-    background:#202b3c;
-    color:#fff;
-    padding:12px 16px;
-    border-radius:8px;
-    z-index:99;
 }
 
 /* MOBILE */
@@ -409,6 +432,7 @@ a{
 
 <!-- HEADER -->
 <header class="header">
+
     <div class="container header-row">
 
         <a class="logo" href="index.html">
@@ -416,12 +440,15 @@ a{
         </a>
 
         <form class="search" id="searchForm">
+
             <input
                 id="searchInput"
                 type="search"
                 placeholder="কি খুঁজছেন?"
             >
+
             <button type="submit">⌕</button>
+
         </form>
 
         <nav class="header-actions">
@@ -450,6 +477,7 @@ a{
         </nav>
 
     </div>
+
 </header>
 
 
@@ -457,18 +485,25 @@ a{
 <main class="container page">
 
     <div class="breadcrumbs">
+
         <a href="index.html">Home</a>
+
         &nbsp;›&nbsp;
+
         <a href="cart.html">Cart</a>
+
         &nbsp;›&nbsp;
+
         Checkout
+
     </div>
 
 
     <div class="checkout-grid">
 
-        <!-- LEFT -->
-        <div class="form-card">
+
+        <!-- LEFT FORM -->
+        <div class="form-card" id="checkoutCard">
 
             <h1>🛍️ অর্ডার কনফার্ম করুন</h1>
 
@@ -476,35 +511,54 @@ a{
                 আপনার ডেলিভারি তথ্য দিন এবং নিচের অর্ডারটি নিশ্চিত করুন।
             </p>
 
-            <form id="checkoutForm">
+
+            <!-- IMPORTANT FORM -->
+            <form id="checkoutForm" novalidate>
+
 
                 <h2>📦 ডেলিভারি তথ্য</h2>
 
+
                 <label>
+
                     আপনার নাম
+
                     <input
                         type="text"
                         name="name"
                         placeholder="আপনার পুরো নাম"
                         required
                     >
+
                 </label>
 
+
                 <label>
+
                     মোবাইল নম্বর
+
                     <input
                         type="tel"
                         name="phone"
+                        inputmode="numeric"
                         placeholder="01XXXXXXXXX"
-                        pattern="01[0-9]{9}"
+                        maxlength="11"
                         required
                     >
+
                 </label>
 
+
                 <label>
+
                     জেলা
+
                     <select name="district" required>
-                        <option value="">জেলা নির্বাচন করুন</option>
+
+                        <option value="">
+                            জেলা নির্বাচন করুন
+                        </option>
+
                         <option>ঢাকা</option>
                         <option>চট্টগ্রাম</option>
                         <option>রাজশাহী</option>
@@ -521,49 +575,67 @@ a{
                         <option>দিনাজপুর</option>
                         <option>কুষ্টিয়া</option>
                         <option>পাবনা</option>
+
                     </select>
+
                 </label>
 
+
                 <label>
+
                     সম্পূর্ণ ঠিকানা
+
                     <textarea
                         name="address"
                         placeholder="বাড়ি/রোড/গ্রাম/এলাকার ঠিকানা লিখুন"
                         required
                     ></textarea>
+
                 </label>
 
 
                 <h2>💳 পেমেন্ট পদ্ধতি</h2>
 
+
                 <div class="pay-options">
 
                     <label>
+
                         <input
                             type="radio"
                             name="payment"
                             value="Cash on Delivery"
                             checked
                         >
+
                         💵 Cash on Delivery
+
                     </label>
 
+
                     <label>
+
                         <input
                             type="radio"
                             name="payment"
                             value="bKash"
                         >
+
                         📱 bKash
+
                     </label>
 
+
                     <label>
+
                         <input
                             type="radio"
                             name="payment"
                             value="Nagad"
                         >
+
                         📱 Nagad
+
                     </label>
 
                 </div>
@@ -571,28 +643,34 @@ a{
 
                 <br>
 
+
                 <button
                     type="submit"
                     class="btn primary wide"
+                    id="confirmOrderBtn"
                 >
                     ✅ অর্ডার কনফার্ম করুন
                 </button>
+
 
             </form>
 
         </div>
 
 
-        <!-- RIGHT -->
+        <!-- SUMMARY -->
         <aside class="summary">
 
             <div id="checkoutSummary">
+
                 <div class="empty">
                     অর্ডার লোড হচ্ছে...
                 </div>
+
             </div>
 
         </aside>
+
 
     </div>
 
@@ -605,32 +683,47 @@ a{
     <div class="container footer-grid">
 
         <div>
+
             <h3>ShopNest BD</h3>
+
             <p>
                 Shop Smart, Live Better —
                 বাংলাদেশের জন্য আধুনিক অনলাইন শপিং প্ল্যাটফর্ম।
             </p>
+
         </div>
 
+
         <div>
+
             <h3>দ্রুত লিংক</h3>
+
             <a href="products.html">সব পণ্য</a>
             <a href="cart.html">কার্ট</a>
             <a href="wishlist.html">Wishlist</a>
+
         </div>
 
+
         <div>
+
             <h3>সাহায্য</h3>
+
             <a href="#">শিপিং পলিসি</a>
             <a href="#">রিটার্ন পলিসি</a>
             <a href="#">প্রাইভেসি</a>
+
         </div>
 
+
         <div>
+
             <h3>যোগাযোগ</h3>
+
             <p>☎ 09612-345678</p>
             <p>✉ support@shopnest.bd</p>
             <p>📍 Bangladesh</p>
+
         </div>
 
     </div>
@@ -639,6 +732,10 @@ a{
 
 
 <script>
+
+/* =========================
+   SHOPNEST CHECKOUT
+========================= */
 
 const STORE_KEY = "shopnest_products_v1";
 const CART_KEY = "shopnest_cart";
@@ -650,170 +747,170 @@ const ORDER_KEY = "shopnest_orders";
 
 const defaultProducts = [
 
-{
-    id:1,
-    name:"TWS ইয়ারবাডস",
-    cat:"electronics",
-    price:990,
-    old:1800,
-    rating:4.6,
-    sale:true,
-    emoji:"🎧"
-},
+    {
+        id:1,
+        name:"TWS ইয়ারবাডস",
+        cat:"electronics",
+        price:990,
+        old:1800,
+        rating:4.6,
+        sale:true,
+        emoji:"🎧"
+    },
 
-{
-    id:2,
-    name:"স্মার্ট ওয়াচ",
-    cat:"electronics",
-    price:1499,
-    old:2500,
-    rating:4.7,
-    sale:true,
-    emoji:"⌚"
-},
+    {
+        id:2,
+        name:"স্মার্ট ওয়াচ",
+        cat:"electronics",
+        price:1499,
+        old:2500,
+        rating:4.7,
+        sale:true,
+        emoji:"⌚"
+    },
 
-{
-    id:3,
-    name:"ল্যাপটপ ব্যাকপ্যাক",
-    cat:"fashion",
-    price:780,
-    old:1200,
-    rating:4.5,
-    sale:true,
-    emoji:"🎒"
-},
+    {
+        id:3,
+        name:"ল্যাপটপ ব্যাকপ্যাক",
+        cat:"fashion",
+        price:780,
+        old:1200,
+        rating:4.5,
+        sale:true,
+        emoji:"🎒"
+    },
 
-{
-    id:4,
-    name:"ক্যাজুয়াল স্নিকার্স",
-    cat:"fashion",
-    price:999,
-    old:2000,
-    rating:4.4,
-    sale:true,
-    emoji:"👟"
-},
+    {
+        id:4,
+        name:"ক্যাজুয়াল স্নিকার্স",
+        cat:"fashion",
+        price:999,
+        old:2000,
+        rating:4.4,
+        sale:true,
+        emoji:"👟"
+    },
 
-{
-    id:5,
-    name:"স্কিন কেয়ার সেট",
-    cat:"beauty",
-    price:455,
-    old:650,
-    rating:4.8,
-    sale:true,
-    emoji:"🧴"
-},
+    {
+        id:5,
+        name:"স্কিন কেয়ার সেট",
+        cat:"beauty",
+        price:455,
+        old:650,
+        rating:4.8,
+        sale:true,
+        emoji:"🧴"
+    },
 
-{
-    id:6,
-    name:"স্মার্টফোন",
-    cat:"electronics",
-    price:15999,
-    old:18500,
-    rating:4.7,
-    sale:false,
-    emoji:"📱"
-},
+    {
+        id:6,
+        name:"স্মার্টফোন",
+        cat:"electronics",
+        price:15999,
+        old:18500,
+        rating:4.7,
+        sale:false,
+        emoji:"📱"
+    },
 
-{
-    id:7,
-    name:"ওয়্যারলেস হেডফোন",
-    cat:"electronics",
-    price:2200,
-    old:3200,
-    rating:4.6,
-    sale:false,
-    emoji:"🎧"
-},
+    {
+        id:7,
+        name:"ওয়্যারলেস হেডফোন",
+        cat:"electronics",
+        price:2200,
+        old:3200,
+        rating:4.6,
+        sale:false,
+        emoji:"🎧"
+    },
 
-{
-    id:8,
-    name:"ড্রেস কালেকশন",
-    cat:"fashion",
-    price:1290,
-    old:1800,
-    rating:4.5,
-    sale:false,
-    emoji:"👗"
-},
+    {
+        id:8,
+        name:"ড্রেস কালেকশন",
+        cat:"fashion",
+        price:1290,
+        old:1800,
+        rating:4.5,
+        sale:false,
+        emoji:"👗"
+    },
 
-{
-    id:9,
-    name:"এয়ার ফ্রায়ার",
-    cat:"home",
-    price:3990,
-    old:4500,
-    rating:4.6,
-    sale:false,
-    emoji:"🍳"
-},
+    {
+        id:9,
+        name:"এয়ার ফ্রায়ার",
+        cat:"home",
+        price:3990,
+        old:4500,
+        rating:4.6,
+        sale:false,
+        emoji:"🍳"
+    },
 
-{
-    id:10,
-    name:"কিচেন ব্লেন্ডার",
-    cat:"home",
-    price:1850,
-    old:2300,
-    rating:4.3,
-    sale:false,
-    emoji:"🥤"
-},
+    {
+        id:10,
+        name:"কিচেন ব্লেন্ডার",
+        cat:"home",
+        price:1850,
+        old:2300,
+        rating:4.3,
+        sale:false,
+        emoji:"🥤"
+    },
 
-{
-    id:11,
-    name:"মেকআপ কিট",
-    cat:"beauty",
-    price:1190,
-    old:1600,
-    rating:4.4,
-    sale:false,
-    emoji:"💄"
-},
+    {
+        id:11,
+        name:"মেকআপ কিট",
+        cat:"beauty",
+        price:1190,
+        old:1600,
+        rating:4.4,
+        sale:false,
+        emoji:"💄"
+    },
 
-{
-    id:12,
-    name:"বাচ্চাদের খেলনা গাড়ি",
-    cat:"kids",
-    price:850,
-    old:1100,
-    rating:4.7,
-    sale:false,
-    emoji:"🚗"
-},
+    {
+        id:12,
+        name:"বাচ্চাদের খেলনা গাড়ি",
+        cat:"kids",
+        price:850,
+        old:1100,
+        rating:4.7,
+        sale:false,
+        emoji:"🚗"
+    },
 
-{
-    id:13,
-    name:"টেডি বিয়ার",
-    cat:"kids",
-    price:690,
-    old:900,
-    rating:4.8,
-    sale:false,
-    emoji:"🧸"
-},
+    {
+        id:13,
+        name:"টেডি বিয়ার",
+        cat:"kids",
+        price:690,
+        old:900,
+        rating:4.8,
+        sale:false,
+        emoji:"🧸"
+    },
 
-{
-    id:14,
-    name:"সানগ্লাস",
-    cat:"fashion",
-    price:650,
-    old:900,
-    rating:4.2,
-    sale:false,
-    emoji:"🕶️"
-},
+    {
+        id:14,
+        name:"সানগ্লাস",
+        cat:"fashion",
+        price:650,
+        old:900,
+        rating:4.2,
+        sale:false,
+        emoji:"🕶️"
+    },
 
-{
-    id:15,
-    name:"টেবিল ল্যাম্প",
-    cat:"home",
-    price:950,
-    old:1250,
-    rating:4.5,
-    sale:false,
-    emoji:"💡"
-}
+    {
+        id:15,
+        name:"টেবিল ল্যাম্প",
+        cat:"home",
+        price:950,
+        old:1250,
+        rating:4.5,
+        sale:false,
+        emoji:"💡"
+    }
 
 ];
 
@@ -824,128 +921,124 @@ function getProducts(){
 
     try{
 
-        const saved =
-            JSON.parse(
-                localStorage.getItem(STORE_KEY)
-            );
+        const saved = JSON.parse(
+            localStorage.getItem(STORE_KEY) || "[]"
+        );
 
-        if(Array.isArray(saved) && saved.length){
+        if(
+            Array.isArray(saved) &&
+            saved.length > 0
+        ){
+
             return saved;
+
         }
 
-        return defaultProducts;
+    }catch(error){
 
-    }catch(e){
-
-        return defaultProducts;
+        console.log(error);
 
     }
 
+    return defaultProducts;
 }
 
 
-/* MONEY */
-
-function money(n){
-
-    return "৳ " +
-        Number(n || 0).toLocaleString("en-BD");
-
-}
-
-
-/* CART */
+/* GET CART */
 
 function getCart(){
 
     try{
 
-        const cart =
-            JSON.parse(
-                localStorage.getItem(CART_KEY) || "[]"
-            );
+        const cart = JSON.parse(
+            localStorage.getItem(CART_KEY) || "[]"
+        );
 
-        return Array.isArray(cart) ? cart : [];
+        if(Array.isArray(cart)){
 
-    }catch(e){
+            return cart;
 
-        return [];
+        }
+
+    }catch(error){
+
+        console.log(error);
 
     }
+
+    return [];
+}
+
+
+/* MONEY */
+
+function money(number){
+
+    return "৳ " +
+        Number(number || 0).toLocaleString("en-BD");
 
 }
 
 
-/* WISHLIST COUNT */
+/* COUNTS */
 
 function updateCounts(){
 
     const cart = getCart();
 
-    const count =
-        cart.reduce(
-            (sum,item)=>
-                sum + Number(item.qty || 0),
-            0
-        );
+    const cartCount = cart.reduce(
+        function(total,item){
+
+            return total +
+                Number(item.qty || 0);
+
+        },
+        0
+    );
+
 
     document
         .querySelectorAll("#cartCount")
-        .forEach(el=>{
-            el.textContent = count;
+        .forEach(function(el){
+
+            el.textContent = cartCount;
+
         });
 
 
-    let wish = [];
+    let wishlist = [];
 
     try{
 
-        wish =
-            JSON.parse(
-                localStorage.getItem(WISH_KEY) || "[]"
-            );
+        wishlist = JSON.parse(
+            localStorage.getItem(WISH_KEY) || "[]"
+        );
 
-        if(!Array.isArray(wish)){
-            wish=[];
+        if(!Array.isArray(wishlist)){
+
+            wishlist = [];
+
         }
 
-    }catch(e){
+    }catch(error){
 
-        wish=[];
+        wishlist = [];
 
     }
 
 
     document
         .querySelectorAll("#wishCount")
-        .forEach(el=>{
-            el.textContent = wish.length;
+        .forEach(function(el){
+
+            el.textContent = wishlist.length;
+
         });
 
 }
 
 
-/* TOAST */
-
-function toast(message){
-
-    const e =
-        document.createElement("div");
-
-    e.className="toast";
-
-    e.textContent=message;
-
-    document.body.appendChild(e);
-
-    setTimeout(()=>{
-        e.remove();
-    },1800);
-
-}
-
-
-/* PAGE LOAD */
+/* PAGE READY */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -959,31 +1052,35 @@ document.addEventListener(
         const searchForm =
             document.getElementById("searchForm");
 
+
         if(searchForm){
 
             searchForm.addEventListener(
                 "submit",
-                function(e){
+                function(event){
 
-                    e.preventDefault();
+                    event.preventDefault();
 
                     const input =
                         document.getElementById(
                             "searchInput"
                         );
 
-                    const q =
-                        input.value.trim();
+                    const keyword =
+                        input
+                        ? input.value.trim()
+                        : "";
 
-                    if(q){
 
-                        location.href =
+                    if(keyword){
+
+                        window.location.href =
                             "products.html?q=" +
-                            encodeURIComponent(q);
+                            encodeURIComponent(keyword);
 
                     }else{
 
-                        location.href =
+                        window.location.href =
                             "products.html";
 
                     }
@@ -1001,47 +1098,45 @@ document.addEventListener(
         const products = getProducts();
 
 
-        /* MATCH PRODUCTS */
+        /* MATCH CART PRODUCTS */
 
-        const items =
-            cart
-                .map(function(x){
+        const items = cart
+            .map(function(cartItem){
 
-                    const product =
-                        products.find(function(p){
+                const product =
+                    products.find(function(product){
 
-                            return Number(p.id) ===
-                                Number(x.id);
+                        return Number(product.id) ===
+                            Number(cartItem.id);
 
-                        });
-
-
-                    if(!product){
-                        return null;
-                    }
+                    });
 
 
-                    return {
+                if(!product){
 
-                        ...product,
+                    return null;
 
-                        qty:
-                            Math.max(
-                                1,
-                                Number(x.qty || 1)
-                            )
-
-                    };
-
-                })
-                .filter(function(x){
-
-                    return x !== null;
-
-                });
+                }
 
 
-        /* SUMMARY */
+                return {
+
+                    ...product,
+
+                    qty:Math.max(
+                        1,
+                        Number(cartItem.qty || 1)
+                    )
+
+                };
+
+            })
+            .filter(function(item){
+
+                return item !== null;
+
+            });
+
 
         const summary =
             document.getElementById(
@@ -1050,7 +1145,9 @@ document.addEventListener(
 
 
         if(!summary){
+
             return;
+
         }
 
 
@@ -1060,7 +1157,7 @@ document.addEventListener(
 
             summary.innerHTML = `
 
-                <h3>অর্ডার সামারি</h3>
+                <h3>🧾 অর্ডার সামারি</h3>
 
                 <div class="empty">
 
@@ -1084,13 +1181,13 @@ document.addEventListener(
         }
 
 
-        /* CALCULATE */
+        /* TOTAL */
 
         const subtotal =
             items.reduce(
-                function(sum,item){
+                function(total,item){
 
-                    return sum +
+                    return total +
                         (
                             Number(item.price) *
                             Number(item.qty)
@@ -1102,18 +1199,21 @@ document.addEventListener(
 
 
         const delivery =
-            subtotal >= 999 ? 0 : 60;
+            subtotal >= 999
+            ? 0
+            : 60;
 
 
-        const total =
+        const grandTotal =
             subtotal + delivery;
 
 
-        /* SHOW SUMMARY */
+        /* SUMMARY */
 
         summary.innerHTML = `
 
             <h3>🧾 অর্ডার সামারি</h3>
+
 
             ${items.map(function(item){
 
@@ -1142,7 +1242,9 @@ document.addEventListener(
 
             <div class="sum-row">
 
-                <span>Subtotal</span>
+                <span>
+                    Subtotal
+                </span>
 
                 <b>
                     ${money(subtotal)}
@@ -1153,14 +1255,18 @@ document.addEventListener(
 
             <div class="sum-row">
 
-                <span>Delivery</span>
+                <span>
+                    Delivery
+                </span>
 
                 <b>
+
                     ${
                         delivery === 0
                         ? "Free"
                         : money(delivery)
                     }
+
                 </b>
 
             </div>
@@ -1168,10 +1274,12 @@ document.addEventListener(
 
             <div class="sum-row sum-total">
 
-                <span>Total</span>
+                <span>
+                    Total
+                </span>
 
                 <b>
-                    ${money(total)}
+                    ${money(grandTotal)}
                 </b>
 
             </div>
@@ -1188,15 +1296,23 @@ document.addEventListener(
 
 
         if(!form){
+
+            alert(
+                "Checkout form পাওয়া যায়নি।"
+            );
+
             return;
+
         }
 
 
+        /* SUBMIT */
+
         form.addEventListener(
             "submit",
-            function(e){
+            function(event){
 
-                e.preventDefault();
+                event.preventDefault();
 
 
                 /* CART CHECK */
@@ -1204,10 +1320,10 @@ document.addEventListener(
                 if(items.length === 0){
 
                     alert(
-                        "কার্ট খালি।"
+                        "আপনার কার্ট খালি।"
                     );
 
-                    location.href =
+                    window.location.href =
                         "cart.html";
 
                     return;
@@ -1215,44 +1331,45 @@ document.addEventListener(
                 }
 
 
-                /* FORM DATA */
-
-                const formData =
-                    new FormData(form);
-
+                /* FORM VALUES */
 
                 const name =
-                    String(
-                        formData.get("name") || ""
-                    ).trim();
+                    form.elements["name"]
+                    .value
+                    .trim();
 
 
                 const phone =
-                    String(
-                        formData.get("phone") || ""
-                    ).trim();
+                    form.elements["phone"]
+                    .value
+                    .trim();
 
 
                 const district =
-                    String(
-                        formData.get("district") || ""
-                    ).trim();
+                    form.elements["district"]
+                    .value
+                    .trim();
 
 
                 const address =
-                    String(
-                        formData.get("address") || ""
-                    ).trim();
+                    form.elements["address"]
+                    .value
+                    .trim();
 
 
-                const payment =
-                    String(
-                        formData.get("payment") ||
-                        "Cash on Delivery"
+                const paymentElement =
+                    form.querySelector(
+                        'input[name="payment"]:checked'
                     );
 
 
-                /* EXTRA VALIDATION */
+                const payment =
+                    paymentElement
+                    ? paymentElement.value
+                    : "";
+
+
+                /* VALIDATION */
 
                 if(!name){
 
@@ -1260,16 +1377,20 @@ document.addEventListener(
                         "আপনার নাম লিখুন।"
                     );
 
+                    form.elements["name"].focus();
+
                     return;
 
                 }
 
 
-                if(!phone){
+                if(!/^01[0-9]{9}$/.test(phone)){
 
                     alert(
-                        "মোবাইল নম্বর লিখুন।"
+                        "সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।\nউদাহরণ: 01712345678"
                     );
+
+                    form.elements["phone"].focus();
 
                     return;
 
@@ -1282,6 +1403,8 @@ document.addEventListener(
                         "জেলা নির্বাচন করুন।"
                     );
 
+                    form.elements["district"].focus();
+
                     return;
 
                 }
@@ -1293,166 +1416,260 @@ document.addEventListener(
                         "সম্পূর্ণ ঠিকানা লিখুন।"
                     );
 
+                    form.elements["address"].focus();
+
                     return;
 
                 }
 
 
-                /* CREATE ORDER ID */
+                if(!payment){
+
+                    alert(
+                        "একটি পেমেন্ট পদ্ধতি নির্বাচন করুন।"
+                    );
+
+                    return;
+
+                }
+
+
+                /* ORDER ID */
 
                 const orderId =
-                    "SN" +
-                    Date.now();
+                    "SN" + Date.now();
 
 
-                /* CREATE ORDER */
+                /* ORDER */
 
                 const order = {
 
-                    id: orderId,
+                    id:orderId,
 
                     date:
                         new Date()
                         .toLocaleString("bn-BD"),
 
-                    name: name,
+                    name:name,
 
-                    phone: phone,
+                    phone:phone,
 
-                    district: district,
+                    district:district,
 
-                    address: address,
+                    address:address,
 
-                    payment: payment,
+                    payment:payment,
 
-                    items: items,
+                    items:items,
 
-                    subtotal: subtotal,
+                    subtotal:subtotal,
 
-                    delivery: delivery,
+                    delivery:delivery,
 
-                    total: total,
+                    total:grandTotal,
 
-                    status: "Pending"
+                    status:"Pending"
 
                 };
 
 
-                /* GET OLD ORDERS */
+                /* OLD ORDERS */
 
                 let orders = [];
 
 
                 try{
 
-                    orders =
-                        JSON.parse(
-                            localStorage.getItem(
-                                ORDER_KEY
-                            ) || "[]"
-                        );
+                    orders = JSON.parse(
+                        localStorage.getItem(
+                            ORDER_KEY
+                        ) || "[]"
+                    );
 
 
                     if(!Array.isArray(orders)){
 
-                        orders=[];
+                        orders = [];
 
                     }
 
                 }catch(error){
 
-                    orders=[];
+                    orders = [];
 
                 }
 
 
-                /* ADD NEW ORDER */
+                /* ADD ORDER */
 
                 orders.unshift(order);
 
 
-                /* SAVE ORDER */
+                /* SAVE */
 
-                localStorage.setItem(
-                    ORDER_KEY,
-                    JSON.stringify(orders)
-                );
+                try{
 
-
-                /* CLEAR CART */
-
-                localStorage.removeItem(
-                    CART_KEY
-                );
+                    localStorage.setItem(
+                        ORDER_KEY,
+                        JSON.stringify(orders)
+                    );
 
 
-                /* UPDATE COUNT */
+                    localStorage.removeItem(
+                        CART_KEY
+                    );
+
+                }catch(error){
+
+                    alert(
+                        "অর্ডার সংরক্ষণ করা যায়নি। আবার চেষ্টা করুন।"
+                    );
+
+                    return;
+
+                }
+
+
+                /* UPDATE CART */
 
                 updateCounts();
 
 
+                /* HIDE FORM */
+
+                const checkoutCard =
+                    document.getElementById(
+                        "checkoutCard"
+                    );
+
+
                 /* SUCCESS PAGE */
 
-                summary.innerHTML = `
+                checkoutCard.innerHTML = `
 
-                    <div
-                        style="
-                        text-align:center;
-                        padding:20px 5px;
-                        "
-                    >
+                    <div class="success-box">
 
-                        <div
-                            style="
-                            font-size:55px;
-                            margin-bottom:10px;
-                            "
-                        >
+                        <div class="success-icon">
                             ✅
                         </div>
 
-                        <h2>
-                            অর্ডার সফল হয়েছে!
-                        </h2>
+
+                        <h1>
+                            অর্ডার সফলভাবে সম্পন্ন হয়েছে!
+                        </h1>
+
 
                         <p>
-                            আপনার অর্ডারটি গ্রহণ করা হয়েছে।
+                            আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে।
                         </p>
 
-                        <p>
-                            <b>Order ID:</b><br>
-                            ${order.id}
-                        </p>
 
-                        <p>
-                            <b>মোট:</b>
-                            ${money(order.total)}
-                        </p>
+                        <div class="order-info">
+
+                            <p>
+
+                                <b>
+                                    Order ID:
+                                </b>
+
+                                <br>
+
+                                ${order.id}
+
+                            </p>
+
+
+                            <p>
+
+                                <b>
+                                    মোট:
+                                </b>
+
+                                ${money(order.total)}
+
+                            </p>
+
+
+                            <p>
+
+                                <b>
+                                    পেমেন্ট:
+                                </b>
+
+                                ${order.payment}
+
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="successOk"
+                            class="btn success-btn"
+                        >
+                            OK
+                        </button>
 
                     </div>
 
                 `;
 
 
-                /* SUCCESS MESSAGE */
+                /* SUCCESS SUMMARY */
 
-                alert(
-                    "অর্ডার সফলভাবে সম্পন্ন হয়েছে!\n\n" +
-                    "Order ID: " +
-                    order.id +
-                    "\nমোট: " +
-                    money(order.total)
-                );
+                summary.innerHTML = `
+
+                    <h3>
+                        ✅ অর্ডার সম্পন্ন
+                    </h3>
+
+                    <div class="empty">
+
+                        অর্ডার ID
+
+                        <br>
+
+                        <b>
+                            ${order.id}
+                        </b>
+
+                        <br><br>
+
+                        মোট
+
+                        <br>
+
+                        <b>
+                            ${money(order.total)}
+                        </b>
+
+                    </div>
+
+                `;
 
 
-                /* ACCOUNT PAGE */
+                /* OK BUTTON */
 
-                setTimeout(function(){
+                const okButton =
+                    document.getElementById(
+                        "successOk"
+                    );
 
-                    window.location.href =
-                        "account.html";
 
-                },500);
+                if(okButton){
+
+                    okButton.addEventListener(
+                        "click",
+                        function(){
+
+                            window.location.href =
+                                "account.html";
+
+                        }
+                    );
+
+                }
 
             }
         );
@@ -1466,4 +1683,4 @@ document.addEventListener(
 </html>
 
 
-            
+    
