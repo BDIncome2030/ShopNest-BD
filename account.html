@@ -19,7 +19,8 @@ body{
 }
 
 .container{
-    width:min(1180px,92%);
+    width:92%;
+    max-width:1100px;
     margin:auto;
 }
 
@@ -31,18 +32,18 @@ a{
 /* HEADER */
 .header{
     background:#fff;
-    border-bottom:1px solid #eee;
+    border-bottom:1px solid #e5e7eb;
 }
 
 .header-row{
-    min-height:74px;
+    min-height:70px;
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:15px;
 }
 
 .logo{
-    font-size:25px;
+    font-size:24px;
     font-weight:800;
     white-space:nowrap;
 }
@@ -50,22 +51,22 @@ a{
 .logo-mark{
     display:inline-grid;
     place-items:center;
-    background:#ef4050;
-    color:#fff;
-    width:28px;
-    height:28px;
+    width:30px;
+    height:30px;
     border-radius:9px;
+    background:#ed3345;
+    color:#fff;
 }
 
 .logo span:last-child{
-    color:#e7353f;
+    color:#ed3345;
 }
 
 /* SEARCH */
 .search{
-    display:flex;
     flex:1;
-    max-width:560px;
+    max-width:550px;
+    display:flex;
     border:1px solid #ddd;
     border-radius:25px;
     overflow:hidden;
@@ -73,16 +74,17 @@ a{
 
 .search input{
     flex:1;
+    min-width:0;
     border:0;
     outline:0;
-    padding:13px 18px;
+    padding:12px 16px;
     font-size:15px;
 }
 
 .search button{
-    width:58px;
+    width:55px;
     border:0;
-    background:#ed3042;
+    background:#ed3345;
     color:#fff;
     font-size:22px;
 }
@@ -90,7 +92,7 @@ a{
 /* ACTIONS */
 .header-actions{
     display:flex;
-    gap:18px;
+    gap:15px;
     margin-left:auto;
 }
 
@@ -106,7 +108,7 @@ a{
 }
 
 .header-actions b{
-    background:#e7353f;
+    background:#ed3345;
     color:#fff;
     border-radius:10px;
     padding:2px 5px;
@@ -115,74 +117,73 @@ a{
 
 /* PAGE */
 .page{
-    padding:25px 0 80px;
+    padding:25px 0 70px;
 }
 
-.breadcrumbs{
-    color:#8a94a0;
+.breadcrumb{
     margin-bottom:20px;
+    color:#777;
     font-size:14px;
 }
 
-.breadcrumbs a{
-    color:#e7353f;
+.breadcrumb a{
+    color:#ed3345;
 }
 
-/* CARDS */
+/* CARD */
 .card{
     background:#fff;
-    border:1px solid #e3e7ec;
+    border:1px solid #e1e5ea;
     border-radius:14px;
-    padding:22px;
-    margin-bottom:22px;
+    padding:20px;
+    margin-bottom:20px;
     box-shadow:0 3px 15px rgba(0,0,0,.04);
 }
 
 .card h1{
-    margin-top:0;
-    font-size:28px;
+    margin:0 0 8px;
+    font-size:26px;
 }
 
 .card h2{
-    margin-top:0;
+    margin:0 0 18px;
 }
 
 /* PROFILE */
 .profile{
-    display:grid;
-    grid-template-columns:100px 1fr;
-    gap:20px;
+    display:flex;
     align-items:center;
+    gap:18px;
 }
 
 .avatar{
-    width:90px;
-    height:90px;
+    width:80px;
+    height:80px;
     border-radius:50%;
     background:#eaf1ff;
     display:grid;
     place-items:center;
-    font-size:45px;
-}
-
-.info p{
-    margin:8px 0;
+    font-size:40px;
+    flex-shrink:0;
 }
 
 /* ORDER */
 .order{
-    border:1px solid #e1e5ea;
+    background:#fafbfd;
+    border:1px solid #e0e5eb;
     border-radius:12px;
     padding:18px;
     margin-bottom:15px;
-    background:#fafbfd;
 }
 
-.order-header{
+.order-head{
     display:flex;
     justify-content:space-between;
+    align-items:center;
     gap:10px;
     flex-wrap:wrap;
+    padding-bottom:12px;
+    border-bottom:1px solid #eee;
 }
 
 .order-id{
@@ -190,66 +191,89 @@ a{
     font-size:17px;
 }
 
+.order-date{
+    color:#777;
+    font-size:12px;
+    margin-top:5px;
+}
+
 .status{
-    background:#fff2d6;
-    color:#9a6700;
-    padding:5px 10px;
+    background:#fff1cf;
+    color:#956400;
+    padding:6px 12px;
     border-radius:20px;
     font-size:12px;
     font-weight:bold;
 }
 
-.order-row{
+.info-row{
     display:flex;
     justify-content:space-between;
-    padding:8px 0;
+    gap:15px;
+    padding:10px 0;
     border-bottom:1px solid #eee;
 }
 
-.order-total{
+.info-row span:first-child{
+    color:#687586;
+}
+
+.info-row span:last-child{
+    text-align:right;
+    font-weight:bold;
+}
+
+.items{
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+}
+
+.item{
+    padding:5px 0;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    padding-top:14px;
     font-size:19px;
     font-weight:bold;
-    padding-top:14px;
 }
 
 .empty{
     text-align:center;
-    padding:35px 15px;
-    color:#687586;
     background:#f8fafc;
     border-radius:10px;
+    padding:35px 15px;
+    color:#687586;
 }
 
-/* BUTTON */
 .btn{
     display:inline-block;
-    border:0;
-    border-radius:8px;
-    padding:12px 18px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.primary{
+    margin-top:15px;
     background:#ed3345;
     color:#fff;
+    padding:11px 18px;
+    border-radius:8px;
+    font-weight:bold;
 }
 
 /* FOOTER */
 .footer{
     background:#172234;
     color:#dce3ed;
-    padding:40px 0 80px;
+    padding:35px 0 80px;
 }
 
 .footer-grid{
     display:grid;
     grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:30px;
+    gap:25px;
 }
 
 .footer h3{
     color:#fff;
+    margin-top:0;
 }
 
 .footer p,
@@ -275,16 +299,12 @@ a{
     }
 
     .header-actions{
+        margin-left:auto;
         gap:10px;
     }
 
     .profile{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .avatar{
-        margin:auto;
+        align-items:flex-start;
     }
 
     .footer-grid{
@@ -295,19 +315,33 @@ a{
 @media(max-width:500px){
 
     .logo{
-        font-size:21px;
+        font-size:20px;
     }
 
     .header-actions a{
-        font-size:16px;
+        font-size:17px;
     }
 
     .card{
         padding:16px;
     }
 
-    .card h1{
-        font-size:24px;
+    .profile{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .avatar{
+        margin:auto;
+    }
+
+    .info-row{
+        flex-direction:column;
+        gap:4px;
+    }
+
+    .info-row span:last-child{
+        text-align:left;
     }
 
     .footer-grid{
@@ -322,53 +356,51 @@ a{
 <!-- HEADER -->
 <header class="header">
 
-    <div class="container header-row">
+<div class="container header-row">
 
-        <a class="logo" href="index.html">
-            <span class="logo-mark">✦</span>
-            Shop<span>Nest</span>
-        </a>
+<a class="logo" href="index.html">
+<span class="logo-mark">✦</span>
+Shop<span>Nest</span>
+</a>
 
-        <form class="search" id="searchForm">
+<form class="search" id="searchForm">
 
-            <input
-                id="searchInput"
-                type="search"
-                placeholder="কি খুঁজছেন?"
-            >
+<input
+id="searchInput"
+type="search"
+placeholder="কি খুঁজছেন?"
+>
 
-            <button type="submit">
-                ⌕
-            </button>
+<button type="submit">⌕</button>
 
-        </form>
+</form>
 
-        <nav class="header-actions">
+<nav class="header-actions">
 
-            <a href="account.html">
-                👤
-                <small>Account</small>
-            </a>
+<a href="account.html">
+👤
+<small>Account</small>
+</a>
 
-            <a href="wishlist.html">
-                ♡
-                <small>
-                    Wishlist
-                    <b id="wishCount">0</b>
-                </small>
-            </a>
+<a href="wishlist.html">
+♡
+<small>
+Wishlist
+<b id="wishCount">0</b>
+</small>
+</a>
 
-            <a href="cart.html">
-                🛒
-                <small>
-                    Cart
-                    <b id="cartCount">0</b>
-                </small>
-            </a>
+<a href="cart.html">
+🛒
+<small>
+Cart
+<b id="cartCount">0</b>
+</small>
+</a>
 
-        </nav>
+</nav>
 
-    </div>
+</div>
 
 </header>
 
@@ -376,59 +408,49 @@ a{
 <!-- MAIN -->
 <main class="container page">
 
-    <div class="breadcrumbs">
-
-        <a href="index.html">Home</a>
-
-        &nbsp;›&nbsp;
-
-        Account
-
-    </div>
+<div class="breadcrumb">
+<a href="index.html">Home</a>
+&nbsp;›&nbsp;
+Account
+</div>
 
 
-    <!-- ACCOUNT -->
-    <div class="card">
+<!-- ACCOUNT -->
+<section class="card">
 
-        <div class="profile">
+<div class="profile">
 
-            <div class="avatar">
-                👤
-            </div>
+<div class="avatar">👤</div>
 
-            <div class="info">
+<div>
 
-                <h1>
-                    আমার অ্যাকাউন্ট
-                </h1>
+<h1>আমার অ্যাকাউন্ট</h1>
 
-                <p>
-                    আপনার অর্ডারের তথ্য এখানে দেখতে পারবেন।
-                </p>
+<p>
+আপনার অর্ডারের তথ্য এখানে দেখতে পারবেন।
+</p>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
-    </div>
+</section>
 
 
-    <!-- ORDERS -->
-    <div class="card">
+<!-- ORDERS -->
+<section class="card">
 
-        <h2>
-            📦 আমার অর্ডার
-        </h2>
+<h2>📦 আমার অর্ডার</h2>
 
-        <div id="orderList">
+<div id="orderList">
 
-            <div class="empty">
-                অর্ডার লোড হচ্ছে...
-            </div>
+<div class="empty">
+অর্ডার লোড হচ্ছে...
+</div>
 
-        </div>
+</div>
 
-    </div>
+</section>
 
 </main>
 
@@ -436,87 +458,57 @@ a{
 <!-- FOOTER -->
 <footer class="footer">
 
-    <div class="container footer-grid">
+<div class="container footer-grid">
 
-        <div>
+<div>
 
-            <h3>
-                ShopNest BD
-            </h3>
+<h3>ShopNest BD</h3>
 
-            <p>
-                Shop Smart, Live Better —
-                বাংলাদেশের জন্য আধুনিক অনলাইন শপিং প্ল্যাটফর্ম।
-            </p>
+<p>
+Shop Smart, Live Better —
+বাংলাদেশের জন্য আধুনিক অনলাইন শপিং প্ল্যাটফর্ম।
+</p>
 
-        </div>
+</div>
 
-        <div>
+<div>
 
-            <h3>
-                দ্রুত লিংক
-            </h3>
+<h3>দ্রুত লিংক</h3>
 
-            <a href="products.html">
-                সব পণ্য
-            </a>
+<a href="products.html">সব পণ্য</a>
+<a href="cart.html">কার্ট</a>
+<a href="wishlist.html">Wishlist</a>
 
-            <a href="cart.html">
-                কার্ট
-            </a>
+</div>
 
-            <a href="wishlist.html">
-                Wishlist
-            </a>
+<div>
 
-        </div>
+<h3>সাহায্য</h3>
 
-        <div>
+<a href="#">শিপিং পলিসি</a>
+<a href="#">রিটার্ন পলিসি</a>
+<a href="#">প্রাইভেসি</a>
 
-            <h3>
-                সাহায্য
-            </h3>
+</div>
 
-            <a href="#">
-                শিপিং পলিসি
-            </a>
+<div>
 
-            <a href="#">
-                রিটার্ন পলিসি
-            </a>
+<h3>যোগাযোগ</h3>
 
-            <a href="#">
-                প্রাইভেসি
-            </a>
+<p>☎ 09612-345678</p>
+<p>✉ support@shopnest.bd</p>
+<p>📍 Bangladesh</p>
 
-        </div>
+</div>
 
-        <div>
-
-            <h3>
-                যোগাযোগ
-            </h3>
-
-            <p>
-                ☎ 09612-345678
-            </p>
-
-            <p>
-                ✉ support@shopnest.bd
-            </p>
-
-            <p>
-                📍 Bangladesh
-            </p>
-
-        </div>
-
-    </div>
+</div>
 
 </footer>
 
 
 <script>
+
+/* STORAGE KEYS */
 
 const CART_KEY = "shopnest_cart";
 const WISH_KEY = "shopnest_wish";
@@ -525,84 +517,76 @@ const ORDER_KEY = "shopnest_orders";
 
 /* MONEY */
 
-function money(number){
+function money(value){
 
-    return "৳ " +
-        Number(number || 0).toLocaleString("en-BD");
+return "৳ " +
+Number(value || 0).toLocaleString("en-BD");
 
 }
 
 
-/* CART COUNT */
+/* COUNTS */
 
 function updateCounts(){
 
-    let cart = [];
+let cart = [];
 
-    try{
+try{
 
-        cart = JSON.parse(
-            localStorage.getItem(CART_KEY) || "[]"
-        );
+cart = JSON.parse(
+localStorage.getItem(CART_KEY) || "[]"
+);
 
-        if(!Array.isArray(cart)){
-            cart = [];
-        }
+if(!Array.isArray(cart)){
+cart = [];
+}
 
-    }catch(error){
+}catch(e){
 
-        cart = [];
+cart = [];
 
-    }
+}
 
+let cartTotal = 0;
 
-    const cartCount =
-        cart.reduce(
-            function(total,item){
+cart.forEach(function(item){
 
-                return total +
-                    Number(item.qty || 0);
+cartTotal += Number(item.qty || 0);
 
-            },
-            0
-        );
+});
 
+const cartCount =
+document.getElementById("cartCount");
 
-    const cartElement =
-        document.getElementById("cartCount");
-
-
-    if(cartElement){
-        cartElement.textContent = cartCount;
-    }
+if(cartCount){
+cartCount.textContent = cartTotal;
+}
 
 
-    let wish = [];
+let wish = [];
 
-    try{
+try{
 
-        wish = JSON.parse(
-            localStorage.getItem(WISH_KEY) || "[]"
-        );
+wish = JSON.parse(
+localStorage.getItem(WISH_KEY) || "[]"
+);
 
-        if(!Array.isArray(wish)){
-            wish = [];
-        }
+if(!Array.isArray(wish)){
+wish = [];
+}
 
-    }catch(error){
+}catch(e){
 
-        wish = [];
+wish = [];
 
-    }
+}
 
+const wishCount =
+document.getElementById("wishCount");
 
-    const wishElement =
-        document.getElementById("wishCount");
-
-
-    if(wishElement){
-        wishElement.textContent = wish.length;
-    }
+if(wishCount){
+wishCount.textContent = wish.length;
+}
 
 }
 
@@ -611,199 +595,195 @@ function updateCounts(){
 
 function loadOrders(){
 
-    const orderList =
-        document.getElementById("orderList");
+const box =
+document.getElementById("orderList");
 
+if(!box){
+return;
+}
 
-    if(!orderList){
-        return;
-    }
+let orders = [];
 
+try{
 
-    let orders = [];
+orders = JSON.parse(
+localStorage.getItem(ORDER_KEY) || "[]"
+);
 
+if(!Array.isArray(orders)){
+orders = [];
+}
 
-    try{
+}catch(e){
 
-        orders = JSON.parse(
-            localStorage.getItem(ORDER_KEY) || "[]"
-        );
+orders = [];
 
-        if(!Array.isArray(orders)){
-            orders = [];
-        }
+}
 
-    }catch(error){
 
-        orders = [];
+/* NO ORDER */
 
-    }
+if(orders.length === 0){
 
+box.innerHTML = `
+<div class="empty">
 
-    /* NO ORDERS */
+📦 এখনো কোনো অর্ডার নেই।
 
-    if(orders.length === 0){
+<br>
 
-        orderList.innerHTML = `
+<a href="products.html" class="btn">
+শপিং শুরু করুন
+</a>
 
-            <div class="empty">
+</div>
+`;
 
-                📦 এখনো কোনো অর্ডার নেই।
+return;
 
-                <br><br>
+}
 
-                <a
-                    href="products.html"
-                    class="btn primary"
-                >
-                    শপিং শুরু করুন
-                </a>
 
-            </div>
+/* ORDERS */
 
-        `;
+let html = "";
 
-        return;
+orders.forEach(function(order){
 
-    }
+const items =
+Array.isArray(order.items)
+? order.items
+: [];
 
+let itemHTML = "";
 
-    /* SHOW ORDERS */
+if(items.length > 0){
 
-    orderList.innerHTML = orders.map(
-        function(order){
+items.forEach(function(item){
 
-            const items =
-                Array.isArray(order.items)
-                ? order.items
-                : [];
+itemHTML += `
+<div class="item">
+${item.name || "Product"}
+× ${Number(item.qty || 1)}
+</div>
+`;
 
+});
 
-            return `
+}else{
 
-                <div class="order">
+itemHTML = "পণ্য তথ্য নেই";
 
-                    <div class="order-header">
+}
 
-                        <div>
 
-                            <div class="order-id">
-                                Order ID: ${order.id || "N/A"}
-                            </div>
+html += `
 
-                            <small>
-                                ${order.date || ""}
-                            </small>
+<div class="order">
 
-                        </div>
+<div class="order-head">
 
-                        <span class="status">
-                            ${order.status || "Pending"}
-                        </span>
+<div>
 
-                    </div>
+<div class="order-id">
+Order ID: ${order.id || "N/A"}
+</div>
 
+<div class="order-date">
+${order.date || ""}
+</div>
 
-                    <br>
+</div>
 
+<div class="status">
+${order.status || "Pending"}
+</div>
 
-                    <div class="order-row">
+</div>
 
-                        <span>
-                            👤 নাম
-                        </span>
 
-                        <b>
-                            ${order.name || ""}
-                        </b>
+<div class="info-row">
 
-                    </div>
+<span>👤 নাম</span>
 
+<span>
+${order.name || ""}
+</span>
 
-                    <div class="order-row">
+</div>
 
-                        <span>
-                            📱 মোবাইল
-                        </span>
 
-                        <b>
-                            ${order.phone || ""}
-                        </b>
+<div class="info-row">
 
-                    </div>
+<span>📱 মোবাইল</span>
 
+<span>
+${order.phone || ""}
+</span>
 
-                    <div class="order-row">
+</div>
 
-                        <span>
-                            📍 জেলা
-                        </span>
 
-                        <b>
-                            ${order.district || ""}
-                        </b>
+<div class="info-row">
 
-                    </div>
+<span>📍 জেলা</span>
 
+<span>
+${order.district || ""}
+</span>
 
-                    <div class="order-row">
+</div>
 
-                        <span>
-                            💳 পেমেন্ট
-                        </span>
 
-                        <b>
-                            ${order.payment || ""}
-                        </b>
+<div class="info-row">
 
-                    </div>
+<span>🏠 ঠিকানা</span>
 
+<span>
+${order.address || ""}
+</span>
 
-                    <div class="order-row">
+</div>
 
-                        <span>
-                            📦 পণ্য
-                        </span>
 
-                        <span>
+<div class="info-row">
 
-                            ${
-                                items.length
-                                ? items.map(function(item){
+<span>💳 পেমেন্ট</span>
 
-                                    return (
-                                        (item.name || "Product") +
-                                        " × " +
-                                        Number(item.qty || 1)
-                                    );
+<span>
+${order.payment || ""}
+</span>
 
-                                }).join("<br>")
-                                : "পণ্য তথ্য নেই"
-                            }
+</div>
 
-                        </span>
 
-                    </div>
+<div class="items">
 
+<strong>📦 পণ্য</strong>
 
-                    <div class="order-row order-total">
+${itemHTML}
 
-                        <span>
-                            মোট
-                        </span>
+</div>
 
-                        <b>
-                            ${money(order.total)}
-                        </b>
 
-                    </div>
+<div class="total">
 
-                </div>
+<span>মোট</span>
 
-            `;
+<span>
+${money(order.total)}
+</span>
 
-        }
-    ).join("");
+</div>
+
+</div>
+
+`;
+
+});
+
+
+box.innerHTML = html;
 
 }
 
@@ -812,47 +792,40 @@ function loadOrders(){
 
 function setupSearch(){
 
-    const form =
-        document.getElementById("searchForm");
+const form =
+document.getElementById("searchForm");
 
+if(!form){
+return;
+}
 
-    if(!form){
-        return;
-    }
+form.addEventListener(
+"submit",
+function(event){
 
+event.preventDefault();
 
-    form.addEventListener(
-        "submit",
-        function(event){
+const input =
+document.getElementById("searchInput");
 
-            event.preventDefault();
+const keyword =
+input ? input.value.trim() : "";
 
+if(keyword){
 
-            const input =
-                document.getElementById("searchInput");
+window.location.href =
+"products.html?q=" +
+encodeURIComponent(keyword);
 
+}else{
 
-            const keyword =
-                input
-                ? input.value.trim()
-                : "";
+window.location.href =
+"products.html";
 
+}
 
-            if(keyword){
-
-                window.location.href =
-                    "products.html?q=" +
-                    encodeURIComponent(keyword);
-
-            }else{
-
-                window.location.href =
-                    "products.html";
-
-            }
-
-        }
-    );
+}
+);
 
 }
 
@@ -860,16 +833,16 @@ function setupSearch(){
 /* START */
 
 document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+"DOMContentLoaded",
+function(){
 
-        updateCounts();
+updateCounts();
 
-        loadOrders();
+loadOrders();
 
-        setupSearch();
+setupSearch();
 
-    }
+}
 );
 
 </script>
