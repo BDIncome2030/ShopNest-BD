@@ -7,95 +7,426 @@
 @media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}.category-cards{grid-template-columns:repeat(3,1fr)}.product-grid{grid-template-columns:repeat(3,1fr)}.product-grid.large{grid-template-columns:repeat(3,1fr)}.header-row{gap:10px}.header-actions{gap:9px}.hero{padding:25px}.footer-grid{grid-template-columns:2fr 1fr 1fr}}
 @media(max-width:650px){body{padding-bottom:58px}.topbar{display:none}.header{position:relative}.header-row{height:auto;padding:12px 0;flex-wrap:wrap}.mobile-menu{display:block}.logo{font-size:21px}.search{order:3;flex-basis:100%;max-width:none}.header-actions{margin-left:auto}.header-actions a{font-size:16px}.hero{min-height:350px;padding:25px;display:block}.hero h1{font-size:32px}.hero-art{width:100%;height:150px}.product-orb{font-size:75px}.floating-card{right:5px}.trust-grid{grid-template-columns:repeat(2,1fr)}.trust-grid div:nth-child(2){border-right:0}.trust-grid div:nth-child(3){border-top:1px solid #eee}.category-cards{grid-template-columns:repeat(3,1fr)}.cat-card{min-height:100px}.cat-card .emoji{font-size:30px}.product-grid,.product-grid.large{grid-template-columns:repeat(2,1fr)}.product-img{height:140px}.promo-grid{grid-template-columns:1fr}.product-detail,.cart-layout,.checkout-grid{grid-template-columns:1fr}.detail-image{min-height:300px}.detail-info h1{font-size:26px}.footer-grid{grid-template-columns:1fr 1fr}.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:58px;background:#fff;border-top:1px solid #ddd;z-index:50;display:grid;grid-template-columns:repeat(5,1fr)}.bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px}.bottom-nav small{font-size:9px;margin-top:2px}.bottom-nav .active{color:#e7353f}.catalog-head{align-items:flex-start;gap:10px}.catalog-head select{width:120px}.cart-item{grid-template-columns:60px 1fr}.cart-item>.cart-price{grid-column:2}.mini-img{width:60px;height:60px}.admin-stat-grid{grid-template-columns:1fr}.admin-table{font-size:12px}.admin-table th,.admin-table td{padding:8px}.secure{font-size:12px}}
 
-</style>
-</head>
-<body><div id="topbar"></div><header class="header"><div class="container header-row">
-<a class="logo" href="index.html"><span class="logo-mark">✦</span>Shop<span>Nest</span></a>
-<form class="search" id="searchForm"><input id="searchInput" type="search" placeholder="কি খুঁজছেন?"><button>⌕</button></form>
-<nav class="header-actions"><a href="account.html">👤<small>Account</small></a><a href="wishlist.html">♡<small>Wishlist <b id="wishCount">0</b></small></a><a href="cart.html">🛒<small>Cart <b id="cartCount">0</b></small></a></nav>
-</div></header>
-<main class="container page"><div class="breadcrumbs"><a href="index.html">Home</a> / Products</div>
-<div class="catalog-head"><div><h1>সব পণ্য</h1><p id="resultText"></p></div><select id="sort"><option value="default">সাজান</option><option value="low">দাম: কম থেকে বেশি</option><option value="high">দাম: বেশি থেকে কম</option><option value="rating">রেটিং</option></select></div>
-<div class="filter-row" id="filterRow"></div><div class="product-grid large" id="productGrid"></div></main>
-<footer id="footer"></footer><nav class="bottom-nav"><a href="index.html">⌂<small>Home</small></a><a class="active" href="products.html">▦<small>Categories</small></a><a href="cart.html">🛒<small>Cart</small></a><a href="wishlist.html">♡<small>Wishlist</small></a><a href="account.html">👤<small>Account</small></a></nav>
-<script>\nconst STORE_KEY="shopnest_products_v1", CART_KEY="shopnest_cart", WISH_KEY="shopnest_wish", USER_KEY="shopnest_user", ORDER_KEY="shopnest_orders";
-const defaultProducts=[
-{id:1,name:"TWS ইয়ারবাডস",cat:"electronics",price:990,old:1800,rating:4.6,sale:true,emoji:"🎧"},
-{id:2,name:"স্মার্ট ওয়াচ",cat:"electronics",price:1499,old:2500,rating:4.7,sale:true,emoji:"⌚"},
-{id:3,name:"ল্যাপটপ ব্যাকপ্যাক",cat:"fashion",price:780,old:1200,rating:4.5,sale:true,emoji:"🎒"},
-{id:4,name:"ক্যাজুয়াল স্নিকার্স",cat:"fashion",price:999,old:2000,rating:4.4,sale:true,emoji:"👟"},
-{id:5,name:"স্কিন কেয়ার সেট",cat:"beauty",price:455,old:650,rating:4.8,sale:true,emoji:"🧴"},
-{id:6,name:"স্মার্টফোন",cat:"electronics",price:15999,old:18500,rating:4.7,sale:false,emoji:"📱"},
-{id:7,name:"ওয়্যারলেস হেডফোন",cat:"electronics",price:2200,old:3200,rating:4.6,sale:false,emoji:"🎧"},
-{id:8,name:"ড্রেস কালেকশন",cat:"fashion",price:1290,old:1800,rating:4.5,sale:false,emoji:"👗"},
-{id:9,name:"এয়ার ফ্রায়ার",cat:"home",price:3990,old:4500,rating:4.6,sale:false,emoji:"🍳"},
-{id:10,name:"কিচেন ব্লেন্ডার",cat:"home",price:1850,old:2300,rating:4.3,sale:false,emoji:"🥤"},
-{id:11,name:"মেকআপ কিট",cat:"beauty",price:1190,old:1600,rating:4.4,sale:false,emoji:"💄"},
-{id:12,name:"বাচ্চাদের খেলনা গাড়ি",cat:"kids",price:850,old:1100,rating:4.7,sale:false,emoji:"🚗"},
-{id:13,name:"টেডি বিয়ার",cat:"kids",price:690,old:900,rating:4.8,sale:false,emoji:"🧸"},
-{id:14,name:"সানগ্লাস",cat:"fashion",price:650,old:900,rating:4.2,sale:false,emoji:"🕶️"},
-{id:15,name:"টেবিল ল্যাম্প",cat:"home",price:950,old:1250,rating:4.5,sale:false,emoji:"💡"}
+<script>
+const STORE_KEY = "shopnest_products_v1";
+const CART_KEY = "shopnest_cart";
+const WISH_KEY = "shopnest_wish";
+
+const defaultProducts = [
+  {id:1,name:"TWS ইয়ারবাডস",cat:"electronics",price:990,old:1800,rating:4.6,sale:true,emoji:"🎧"},
+  {id:2,name:"স্মার্ট ওয়াচ",cat:"electronics",price:1499,old:2500,rating:4.7,sale:true,emoji:"⌚"},
+  {id:3,name:"ল্যাপটপ ব্যাকপ্যাক",cat:"fashion",price:780,old:1200,rating:4.5,sale:true,emoji:"🎒"},
+  {id:4,name:"ক্যাজুয়াল স্নিকার্স",cat:"fashion",price:999,old:2000,rating:4.4,sale:true,emoji:"👟"},
+  {id:5,name:"স্কিন কেয়ার সেট",cat:"beauty",price:455,old:650,rating:4.8,sale:true,emoji:"🧴"},
+  {id:6,name:"স্মার্টফোন",cat:"electronics",price:15999,old:18500,rating:4.7,sale:false,emoji:"📱"},
+  {id:7,name:"ওয়্যারলেস হেডফোন",cat:"electronics",price:2200,old:3200,rating:4.6,sale:false,emoji:"🎧"},
+  {id:8,name:"ড্রেস কালেকশন",cat:"fashion",price:1290,old:1800,rating:4.5,sale:false,emoji:"👗"},
+  {id:9,name:"এয়ার ফ্রায়ার",cat:"home",price:3990,old:4500,rating:4.6,sale:false,emoji:"🍳"},
+  {id:10,name:"কিচেন ব্লেন্ডার",cat:"home",price:1850,old:2300,rating:4.3,sale:false,emoji:"🥤"},
+  {id:11,name:"মেকআপ কিট",cat:"beauty",price:1190,old:1600,rating:4.4,sale:false,emoji:"💄"},
+  {id:12,name:"বাচ্চাদের খেলনা গাড়ি",cat:"kids",price:850,old:1100,rating:4.7,sale:false,emoji:"🚗"},
+  {id:13,name:"টেডি বিয়ার",cat:"kids",price:690,old:900,rating:4.8,sale:false,emoji:"🧸"},
+  {id:14,name:"সানগ্লাস",cat:"fashion",price:650,old:900,rating:4.2,sale:false,emoji:"🕶️"},
+  {id:15,name:"টেবিল ল্যাম্প",cat:"home",price:950,old:1250,rating:4.5,sale:false,emoji:"💡"}
 ];
-const categories=[
-{key:"electronics",name:"মোবাইল ও ইলেকট্রনিক্স",short:"ইলেকট্রনিক্স",emoji:"📱"},
-{key:"fashion",name:"ফ্যাশন ও পোশাক",short:"ফ্যাশন",emoji:"👗"},
-{key:"home",name:"কম্পিউটার ও গ্যাজেট",short:"হোম",emoji:"💻"},
-{key:"beauty",name:"বিউটি ও পার্সোনাল কেয়ার",short:"বিউটি",emoji:"💄"},
-{key:"home",name:"হোম ও কিচেন",short:"হোম",emoji:"🏠"},
-{key:"kids",name:"বাচ্চাদের পণ্য",short:"কিডস",emoji:"🧸"}];
-function getProducts(){try{return JSON.parse(localStorage.getItem(STORE_KEY))||defaultProducts}catch(e){return defaultProducts}}
-function saveProducts(p){localStorage.setItem(STORE_KEY,JSON.stringify(p))}
-function money(n){return "৳ "+Number(n).toLocaleString("en-BD")}
-function getCart(){return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}
-function saveCart(c){localStorage.setItem(CART_KEY,JSON.stringify(c));updateCounts()}
-function getWish(){return JSON.parse(localStorage.getItem(WISH_KEY)||"[]")}
-function saveWish(w){localStorage.setItem(WISH_KEY,JSON.stringify(w));updateCounts()}
-function addToCart(id,qty=1){let c=getCart(),x=c.find(i=>i.id==id);if(x)x.qty+=qty;else c.push({id:Number(id),qty});saveCart(c);toast("কার্টে যোগ হয়েছে");}
-function toggleWish(id){let w=getWish(),n=Number(id),i=w.indexOf(n);i>=0?w.splice(i,1):w.push(n);saveWish(w);toast(i>=0?"Wishlist থেকে সরানো হয়েছে":"Wishlist-এ যোগ হয়েছে");}
-function updateCounts(){let c=getCart().reduce((s,x)=>s+x.qty,0);let w=getWish().length;document.querySelectorAll("#cartCount").forEach(e=>e.textContent=c);document.querySelectorAll("#wishCount").forEach(e=>e.textContent=w)}
-function toast(t){let e=document.createElement("div");e.className="toast";e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),1800)}
-function productCard(p){let w=getWish().includes(Number(p.id));return `<article class="product-card"><div class="product-img">${p.emoji||"📦"}${p.sale?`<span class="discount">-${Math.round((1-p.price/p.old)*100)}%</span>`:""}<button class="wish" onclick="toggleWish(${p.id});location.reload()"> ${w?"♥":"♡"} </button></div><div class="product-info"><div class="rating">★ ${p.rating}</div><div class="product-name">${p.name}</div><div><span class="price">${money(p.price)}</span>${p.old?`<span class="old-price">${money(p.old)}</span>`:""}</div><button class="add" onclick="addToCart(${p.id})">🛒 কার্টে যোগ করুন</button><a class="btn secondary wide" style="margin-top:6px;text-align:center" href="product.html?id=${p.id}">বিস্তারিত</a></div></article>`}
-function renderTopFooter(){let top=document.getElementById("topbar");if(top)top.innerHTML=`<div class="topbar"><div class="container"><span>সারা বাংলাদেশে ডেলিভারি</span><span>🛡️ নিরাপদ পেমেন্ট &nbsp; • &nbsp; 🔄 সহজ রিটার্ন</span><span>☎ Customer Support: 09612-345678</span></div></div>`;let f=document.getElementById("footer");if(f)f.className="footer",f.innerHTML=`<div class="container footer-grid"><div><h3>ShopNest BD</h3><p>Shop Smart, Live Better — বাংলাদেশের জন্য আধুনিক অনলাইন শপিং প্ল্যাটফর্ম।</p></div><div><h3>দ্রুত লিংক</h3><a href="products.html">সব পণ্য</a><a href="cart.html">কার্ট</a><a href="wishlist.html">Wishlist</a></div><div><h3>সাহায্য</h3><a href="#">শিপিং পলিসি</a><a href="#">রিটার্ন পলিসি</a><a href="#">প্রাইভেসি</a></div><div><h3>যোগাযোগ</h3><p>☎ 09612-345678</p><p>✉ support@shopnest.bd</p><p>📍 Bangladesh</p></div></div>`}
-function initCommon(){renderTopFooter();updateCounts();document.querySelectorAll("#searchForm").forEach(f=>f.addEventListener("submit",e=>{e.preventDefault();let q=f.querySelector("input").value.trim();location.href="products.html"+(q?"?q="+encodeURIComponent(q):"")}))}
-document.addEventListener("DOMContentLoaded",initCommon);
-\nconst STORE_KEY="shopnest_products_v1", CART_KEY="shopnest_cart", WISH_KEY="shopnest_wish", USER_KEY="shopnest_user", ORDER_KEY="shopnest_orders";
-const defaultProducts=[
-{id:1,name:"TWS ইয়ারবাডস",cat:"electronics",price:990,old:1800,rating:4.6,sale:true,emoji:"🎧"},
-{id:2,name:"স্মার্ট ওয়াচ",cat:"electronics",price:1499,old:2500,rating:4.7,sale:true,emoji:"⌚"},
-{id:3,name:"ল্যাপটপ ব্যাকপ্যাক",cat:"fashion",price:780,old:1200,rating:4.5,sale:true,emoji:"🎒"},
-{id:4,name:"ক্যাজুয়াল স্নিকার্স",cat:"fashion",price:999,old:2000,rating:4.4,sale:true,emoji:"👟"},
-{id:5,name:"স্কিন কেয়ার সেট",cat:"beauty",price:455,old:650,rating:4.8,sale:true,emoji:"🧴"},
-{id:6,name:"স্মার্টফোন",cat:"electronics",price:15999,old:18500,rating:4.7,sale:false,emoji:"📱"},
-{id:7,name:"ওয়্যারলেস হেডফোন",cat:"electronics",price:2200,old:3200,rating:4.6,sale:false,emoji:"🎧"},
-{id:8,name:"ড্রেস কালেকশন",cat:"fashion",price:1290,old:1800,rating:4.5,sale:false,emoji:"👗"},
-{id:9,name:"এয়ার ফ্রায়ার",cat:"home",price:3990,old:4500,rating:4.6,sale:false,emoji:"🍳"},
-{id:10,name:"কিচেন ব্লেন্ডার",cat:"home",price:1850,old:2300,rating:4.3,sale:false,emoji:"🥤"},
-{id:11,name:"মেকআপ কিট",cat:"beauty",price:1190,old:1600,rating:4.4,sale:false,emoji:"💄"},
-{id:12,name:"বাচ্চাদের খেলনা গাড়ি",cat:"kids",price:850,old:1100,rating:4.7,sale:false,emoji:"🚗"},
-{id:13,name:"টেডি বিয়ার",cat:"kids",price:690,old:900,rating:4.8,sale:false,emoji:"🧸"},
-{id:14,name:"সানগ্লাস",cat:"fashion",price:650,old:900,rating:4.2,sale:false,emoji:"🕶️"},
-{id:15,name:"টেবিল ল্যাম্প",cat:"home",price:950,old:1250,rating:4.5,sale:false,emoji:"💡"}
+
+const categories = [
+  {key:"electronics",name:"মোবাইল ও ইলেকট্রনিক্স",short:"ইলেকট্রনিক্স",emoji:"📱"},
+  {key:"fashion",name:"ফ্যাশন ও পোশাক",short:"ফ্যাশন",emoji:"👗"},
+  {key:"home",name:"কম্পিউটার ও গ্যাজেট",short:"হোম",emoji:"💻"},
+  {key:"beauty",name:"বিউটি ও পার্সোনাল কেয়ার",short:"বিউটি",emoji:"💄"},
+  {key:"kids",name:"বাচ্চাদের পণ্য",short:"কিডস",emoji:"🧸"}
 ];
-const categories=[
-{key:"electronics",name:"মোবাইল ও ইলেকট্রনিক্স",short:"ইলেকট্রনিক্স",emoji:"📱"},
-{key:"fashion",name:"ফ্যাশন ও পোশাক",short:"ফ্যাশন",emoji:"👗"},
-{key:"home",name:"কম্পিউটার ও গ্যাজেট",short:"হোম",emoji:"💻"},
-{key:"beauty",name:"বিউটি ও পার্সোনাল কেয়ার",short:"বিউটি",emoji:"💄"},
-{key:"home",name:"হোম ও কিচেন",short:"হোম",emoji:"🏠"},
-{key:"kids",name:"বাচ্চাদের পণ্য",short:"কিডস",emoji:"🧸"}];
-function getProducts(){try{return JSON.parse(localStorage.getItem(STORE_KEY))||defaultProducts}catch(e){return defaultProducts}}
-function saveProducts(p){localStorage.setItem(STORE_KEY,JSON.stringify(p))}
-function money(n){return "৳ "+Number(n).toLocaleString("en-BD")}
-function getCart(){return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}
-function saveCart(c){localStorage.setItem(CART_KEY,JSON.stringify(c));updateCounts()}
-function getWish(){return JSON.parse(localStorage.getItem(WISH_KEY)||"[]")}
-function saveWish(w){localStorage.setItem(WISH_KEY,JSON.stringify(w));updateCounts()}
-function addToCart(id,qty=1){let c=getCart(),x=c.find(i=>i.id==id);if(x)x.qty+=qty;else c.push({id:Number(id),qty});saveCart(c);toast("কার্টে যোগ হয়েছে");}
-function toggleWish(id){let w=getWish(),n=Number(id),i=w.indexOf(n);i>=0?w.splice(i,1):w.push(n);saveWish(w);toast(i>=0?"Wishlist থেকে সরানো হয়েছে":"Wishlist-এ যোগ হয়েছে");}
-function updateCounts(){let c=getCart().reduce((s,x)=>s+x.qty,0);let w=getWish().length;document.querySelectorAll("#cartCount").forEach(e=>e.textContent=c);document.querySelectorAll("#wishCount").forEach(e=>e.textContent=w)}
-function toast(t){let e=document.createElement("div");e.className="toast";e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),1800)}
-function productCard(p){let w=getWish().includes(Number(p.id));return `<article class="product-card"><div class="product-img">${p.emoji||"📦"}${p.sale?`<span class="discount">-${Math.round((1-p.price/p.old)*100)}%</span>`:""}<button class="wish" onclick="toggleWish(${p.id});location.reload()"> ${w?"♥":"♡"} </button></div><div class="product-info"><div class="rating">★ ${p.rating}</div><div class="product-name">${p.name}</div><div><span class="price">${money(p.price)}</span>${p.old?`<span class="old-price">${money(p.old)}</span>`:""}</div><button class="add" onclick="addToCart(${p.id})">🛒 কার্টে যোগ করুন</button><a class="btn secondary wide" style="margin-top:6px;text-align:center" href="product.html?id=${p.id}">বিস্তারিত</a></div></article>`}
-function renderTopFooter(){let top=document.getElementById("topbar");if(top)top.innerHTML=`<div class="topbar"><div class="container"><span>সারা বাংলাদেশে ডেলিভারি</span><span>🛡️ নিরাপদ পেমেন্ট &nbsp; • &nbsp; 🔄 সহজ রিটার্ন</span><span>☎ Customer Support: 09612-345678</span></div></div>`;let f=document.getElementById("footer");if(f)f.className="footer",f.innerHTML=`<div class="container footer-grid"><div><h3>ShopNest BD</h3><p>Shop Smart, Live Better — বাংলাদেশের জন্য আধুনিক অনলাইন শপিং প্ল্যাটফর্ম।</p></div><div><h3>দ্রুত লিংক</h3><a href="products.html">সব পণ্য</a><a href="cart.html">কার্ট</a><a href="wishlist.html">Wishlist</a></div><div><h3>সাহায্য</h3><a href="#">শিপিং পলিসি</a><a href="#">রিটার্ন পলিসি</a><a href="#">প্রাইভেসি</a></div><div><h3>যোগাযোগ</h3><p>☎ 09612-345678</p><p>✉ support@shopnest.bd</p><p>📍 Bangladesh</p></div></div>`}
-function initCommon(){renderTopFooter();updateCounts();document.querySelectorAll("#searchForm").forEach(f=>f.addEventListener("submit",e=>{e.preventDefault();let q=f.querySelector("input").value.trim();location.href="products.html"+(q?"?q="+encodeURIComponent(q):"")}))}
-document.addEventListener("DOMContentLoaded",initCommon);
-\ndocument.addEventListener("DOMContentLoaded",()=>{const grid=document.getElementById("productGrid"),q=new URLSearchParams(location.search);let all=getProducts(),query=(q.get("q")||"").toLowerCase(),cat=q.get("cat"),sale=q.get("filter")==="sale",sort=document.getElementById("sort");let filters=[["","সব"],...categories.map(c=>[c.key,c.short])];document.getElementById("filterRow").innerHTML=filters.filter((x,i,a)=>a.findIndex(y=>y[0]===x[0])===i).map(x=>`<button class="filter ${cat===x[0]||(!cat&&!x[0])?"active":""}" data-cat="${x[0]}">${x[1]}</button>`).join("");function render(){let p=all.filter(x=>(!query||x.name.toLowerCase().includes(query))&&(!cat||x.cat===cat)&&(!sale||x.sale));if(sort.value==="low")p.sort((a,b)=>a.price-b.price);if(sort.value==="high")p.sort((a,b)=>b.price-a.price);if(sort.value==="rating")p.sort((a,b)=>b.rating-a.rating);document.getElementById("resultText").textContent=`${p.length}টি পণ্য পাওয়া গেছে`;grid.innerHTML=p.length?p.map(productCard).join(""):`<div class="empty">কোনো পণ্য পাওয়া যায়নি।</div>`}document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{cat=b.dataset.cat;document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");render()});sort.onchange=render;render()})\n</script>\n</body></html>
+
+function getProducts(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY));
+    return Array.isArray(saved) && saved.length ? saved : defaultProducts;
+  }catch(e){
+    return defaultProducts;
+  }
+}
+
+function getCart(){
+  try{
+    return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+  }catch(e){
+    return [];
+  }
+}
+
+function saveCart(cart){
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  updateCounts();
+}
+
+function getWish(){
+  try{
+    return JSON.parse(localStorage.getItem(WISH_KEY) || "[]");
+  }catch(e){
+    return [];
+  }
+}
+
+function saveWish(wish){
+  localStorage.setItem(WISH_KEY, JSON.stringify(wish));
+  updateCounts();
+}
+
+function money(n){
+  return "৳ " + Number(n).toLocaleString("en-BD");
+}
+
+function addToCart(id){
+  const cart = getCart();
+  const productId = Number(id);
+  const item = cart.find(x => Number(x.id) === productId);
+
+  if(item){
+    item.qty = Number(item.qty || 0) + 1;
+  }else{
+    cart.push({
+      id: productId,
+      qty: 1
+    });
+  }
+
+  saveCart(cart);
+  toast("কার্টে যোগ হয়েছে");
+}
+
+function toggleWish(id){
+  const wish = getWish();
+  const productId = Number(id);
+  const index = wish.indexOf(productId);
+
+  if(index >= 0){
+    wish.splice(index,1);
+    toast("Wishlist থেকে সরানো হয়েছে");
+  }else{
+    wish.push(productId);
+    toast("Wishlist-এ যোগ হয়েছে");
+  }
+
+  saveWish(wish);
+  renderProducts();
+}
+
+function updateCounts(){
+  const cartCount = getCart().reduce(
+    (sum,item) => sum + Number(item.qty || 0),
+    0
+  );
+
+  const wishCount = getWish().length;
+
+  document.querySelectorAll("#cartCount").forEach(el=>{
+    el.textContent = cartCount;
+  });
+
+  document.querySelectorAll("#wishCount").forEach(el=>{
+    el.textContent = wishCount;
+  });
+}
+
+function toast(text){
+  const el = document.createElement("div");
+  el.className = "toast";
+  el.textContent = text;
+  document.body.appendChild(el);
+
+  setTimeout(()=>{
+    el.remove();
+  },1800);
+}
+
+function renderTopFooter(){
+
+  const top = document.getElementById("topbar");
+
+  if(top){
+    top.innerHTML = `
+      <div class="topbar">
+        <div class="container">
+          <span>সারা বাংলাদেশে ডেলিভারি</span>
+          <span>🛡️ নিরাপদ পেমেন্ট • 🔄 সহজ রিটার্ন</span>
+          <span>☎ Customer Support: 09612-345678</span>
+        </div>
+      </div>
+    `;
+  }
+
+  const footer = document.getElementById("footer");
+
+  if(footer){
+    footer.className = "footer";
+
+    footer.innerHTML = `
+      <div class="container footer-grid">
+
+        <div>
+          <h3>ShopNest BD</h3>
+          <p>
+            Shop Smart, Live Better — বাংলাদেশের জন্য আধুনিক অনলাইন শপিং প্ল্যাটফর্ম।
+          </p>
+        </div>
+
+        <div>
+          <h3>দ্রুত লিংক</h3>
+          <a href="products.html">সব পণ্য</a>
+          <a href="cart.html">কার্ট</a>
+          <a href="wishlist.html">Wishlist</a>
+        </div>
+
+        <div>
+          <h3>সাহায্য</h3>
+          <a href="#">শিপিং পলিসি</a>
+          <a href="#">রিটার্ন পলিসি</a>
+          <a href="#">প্রাইভেসি</a>
+        </div>
+
+        <div>
+          <h3>যোগাযোগ</h3>
+          <p>☎ 09612-345678</p>
+          <p>✉ support@shopnest.bd</p>
+          <p>📍 Bangladesh</p>
+        </div>
+
+      </div>
+    `;
+  }
+}
+
+function productCard(product){
+
+  const wish = getWish().includes(Number(product.id));
+
+  const discount = product.old
+    ? Math.round((1 - product.price / product.old) * 100)
+    : 0;
+
+  return `
+    <article class="product-card">
+
+      <div class="product-img">
+
+        ${product.emoji || "📦"}
+
+        ${
+          product.sale
+          ? `<span class="discount">-${discount}%</span>`
+          : ""
+        }
+
+        <button
+          class="wish"
+          onclick="toggleWish(${product.id})">
+          ${wish ? "♥" : "♡"}
+        </button>
+
+      </div>
+
+      <div class="product-info">
+
+        <div class="rating">
+          ★ ${product.rating}
+        </div>
+
+        <div class="product-name">
+          ${product.name}
+        </div>
+
+        <div>
+          <span class="price">
+            ${money(product.price)}
+          </span>
+
+          ${
+            product.old
+            ? `<span class="old-price">${money(product.old)}</span>`
+            : ""
+          }
+        </div>
+
+        <button
+          class="add"
+          onclick="addToCart(${product.id})">
+          🛒 কার্টে যোগ করুন
+        </button>
+
+        <a
+          class="btn secondary wide"
+          style="margin-top:6px;text-align:center"
+          href="product.html?id=${product.id}">
+          বিস্তারিত
+        </a>
+
+      </div>
+
+    </article>
+  `;
+}
+
+let allProducts = [];
+let currentCategory = "";
+
+function renderProducts(){
+
+  const grid = document.getElementById("productGrid");
+  const resultText = document.getElementById("resultText");
+
+  if(!grid) return;
+
+  const params = new URLSearchParams(location.search);
+
+  const query =
+    (params.get("q") || "").toLowerCase();
+
+  const saleOnly =
+    params.get("filter") === "sale";
+
+  const sort =
+    document.getElementById("sort");
+
+  let products = allProducts.filter(product=>{
+
+    const name =
+      String(product.name || "").toLowerCase();
+
+    const matchSearch =
+      !query || name.includes(query);
+
+    const matchCategory =
+      !currentCategory ||
+      product.cat === currentCategory;
+
+    const matchSale =
+      !saleOnly || product.sale;
+
+    return matchSearch &&
+           matchCategory &&
+           matchSale;
+  });
+
+  if(sort){
+
+    if(sort.value === "low"){
+      products.sort((a,b)=>a.price-b.price);
+    }
+
+    if(sort.value === "high"){
+      products.sort((a,b)=>b.price-a.price);
+    }
+
+    if(sort.value === "rating"){
+      products.sort((a,b)=>b.rating-a.rating);
+    }
+  }
+
+  if(resultText){
+    resultText.textContent =
+      products.length + "টি পণ্য পাওয়া গেছে";
+  }
+
+  if(products.length){
+    grid.innerHTML =
+      products.map(productCard).join("");
+  }else{
+    grid.innerHTML = `
+      <div class="empty">
+        কোনো পণ্য পাওয়া যায়নি।
+      </div>
+    `;
+  }
+}
+
+function createFilters(){
+
+  const filterRow =
+    document.getElementById("filterRow");
+
+  if(!filterRow) return;
+
+  const buttons = [
+    {key:"",name:"সব"},
+    ...categories
+  ];
+
+  filterRow.innerHTML =
+    buttons.map(category=>`
+      <button
+        class="filter ${category.key === "" ? "active" : ""}"
+        data-cat="${category.key}">
+        ${category.name || category.short}
+      </button>
+    `).join("");
+
+  filterRow.querySelectorAll(".filter")
+    .forEach(button=>{
+
+      button.addEventListener("click",()=>{
+
+        currentCategory =
+          button.dataset.cat;
+
+        filterRow.querySelectorAll(".filter")
+          .forEach(btn=>{
+            btn.classList.remove("active");
+          });
+
+        button.classList.add("active");
+
+        renderProducts();
+      });
+
+    });
+}
+
+function init(){
+
+  allProducts = getProducts();
+
+  renderTopFooter();
+  updateCounts();
+  createFilters();
+  renderProducts();
+
+  const sort =
+    document.getElementById("sort");
+
+  if(sort){
+    sort.addEventListener(
+      "change",
+      renderProducts
+    );
+  }
+
+  const searchForm =
+    document.getElementById("searchForm");
+
+  if(searchForm){
+
+    searchForm.addEventListener("submit",e=>{
+
+      e.preventDefault();
+
+      const input =
+        document.getElementById("searchInput");
+
+      const query =
+        input ? input.value.trim() : "";
+
+      location.href =
+        "products.html" +
+        (query
+          ? "?q=" + encodeURIComponent(query)
+          : "");
+    });
+  }
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  init
+);
+</script>
